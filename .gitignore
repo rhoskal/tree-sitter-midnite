@@ -45,3 +45,9 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+
+# nix
+.envrc
+.direnv
+.nix*
+
