@@ -17,15 +17,23 @@
 (return_type
   "->" @operator)
 
-(binary_expression operator: (_) @operator)
+(binary_expression
+  operator: _ @operator)
 
-(integer_literal @number)
-(float_literal @number)
-(char_literal @string)
-(string_literal @string)
+; Literals
 
-(upper_identifier @type)
-(lower_identifier @variable)
+(integer_literal) @number
+(float_literal) @number
 
-(doc_comment @comment.doc)
-(line_comment @comment)
+(char_literal) @string
+(string_literal) @string
+
+; Identifiers
+
+(upper_identifier) @type
+(lower_identifier) @variable
+
+; Comments
+
+(doc_comment) @comment.doc
+(line_comment) @comment

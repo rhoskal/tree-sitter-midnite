@@ -196,11 +196,11 @@ module.exports = grammar({
               /[0-9][0-9_]*/,
               ".",
               optional(/[0-9][0-9_]*/),
-              /[e]/,
+              "e",
               optional(/[+-]/),
               /[0-9][0-9_]*/,
             ), // Float with exponent: 1.23e4
-            seq(/[0-9][0-9_]*/, /[e]/, optional(/[+-]/), /[0-9][0-9_]*/), // Scientific notation without a decimal: 5e10
+            seq(/[0-9][0-9_]*/, "e", optional(/[+-]/), /[0-9][0-9_]*/), // Scientific notation without a decimal: 5e10
           ),
         ),
       ),

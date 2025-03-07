@@ -976,8 +976,8 @@
                     ]
                   },
                   {
-                    "type": "PATTERN",
-                    "value": "[e]"
+                    "type": "STRING",
+                    "value": "e"
                   },
                   {
                     "type": "CHOICE",
@@ -1005,8 +1005,8 @@
                     "value": "[0-9][0-9_]*"
                   },
                   {
-                    "type": "PATTERN",
-                    "value": "[e]"
+                    "type": "STRING",
+                    "value": "e"
                   },
                   {
                     "type": "CHOICE",
@@ -1185,6 +1185,5 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": [],
-  "reserved": {}
+  "supertypes": []
 }
