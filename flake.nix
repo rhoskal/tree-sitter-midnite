@@ -16,6 +16,7 @@
             nixfmt-rfc-style
             nodejs_23
             pnpm_10
+            tree-sitter
           ]
           ++ (
             if stdenv.isLinux then
