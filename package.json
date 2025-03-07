@@ -48,12 +48,12 @@
   "scripts": {
     "format": "prettier --write '**/*.js'",
     "install": "node-gyp-build",
-    "prepare": "husky",
+    "prepare": "is-ci || husky",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground"
   },
   "lint-staged": {
-    "**/*.{js}": [
+    "**/*.js": [
       "prettier --write"
     ]
   }
