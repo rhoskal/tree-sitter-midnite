@@ -1,67 +1,31 @@
-(line_comment) @comment
-(doc_comment) @comment.doc
+(module_declaration
+  "module" @keyword
+  "exposing" @keyword
+  "end" @keyword)
 
-(identifier) @variable
-(type_annotation) @type
-(boolean) @constant.builtin
-(function_definition name: (identifier) @function)
-(module_declaration name: (identifier) @module)
-(match_expression) @conditional
+(foreign_function_declaration
+  "foreign" @keyword
+  "=" @operator)
 
-; Delimiter
+(function_declaration
+  "let" @keyword
+  "=" @operator)
 
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
+(type_annotation
+  ":" @operator)
 
-":" @punctuation.delimiter
-"." @punctuation.delimiter
-"," @punctuation.delimiter
+(return_type
+  "->" @operator)
 
-; Keyword
+(binary_expression operator: (_) @operator)
 
-"alias" @keyword
-"as" @keyword
-"else" @keyword
-"end" @keyword
-"exposing" @keyword
-"fn" @keyword
-"foreign" @keyword
-"hiding" @keyword
-"include" @keyword
-"infixl" @keyword
-"infixn" @keyword
-"infixr" @keyword
-"let" @keyword
-"match" @keyword
-"module" @keyword
-"on" @keyword
-"open" @keyword
-"then" @keyword
-"type" @keyword
-"using" @keyword
-"when" @keyword
+(integer_literal @number)
+(float_literal @number)
+(char_literal @string)
+(string_literal @string)
 
-; Operator
+(upper_identifier @type)
+(lower_identifier @variable)
 
-"+." @operator
-"-." @operator
-"/." @operator
-"*." @operator
-"+" @operator
-"-" @operator
-"/" @operator
-"*" @operator
-"::" @operator
-"<>" @operator
-"==" @operator
-"/=" @operator
-"<" @operator
-"<=" @operator
-">" @operator
-">=" @operator
-"&&" @operator
-"||" @operator
+(doc_comment @comment.doc)
+(line_comment @comment)

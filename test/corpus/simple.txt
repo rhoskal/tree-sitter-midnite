@@ -3,16 +3,24 @@ Simple Module
 ==================
 
 module Foo.Bar exposing (..)
-  ## doc comment
+  let add(x, y) = x + y
 end
 
 ---
 
 (source_file
-  (module_declaration [0, 7] - [2, 3]
-    (module_path [0, 7] - [0, 14]
-      (upper_identifier [0, 7] - [0, 10])
-      (upper_identifier [0, 11] - [0, 14]))
-    (export_list [0, 24] - [0, 28]
-      (expose_all [0, 24] - [0, 28]))
-    (doc_comment [1, 2] - [1, 16]))))
+  (module_declaration
+    (module_path
+      (upper_identifier)
+      (upper_identifier))
+    (export_list
+      (expose_all))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (binary_expression
+          (lower_identifier)
+          (lower_identifier))))))
