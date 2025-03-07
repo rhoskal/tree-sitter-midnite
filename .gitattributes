@@ -39,3 +39,7 @@ Package.resolved linguist-generated
 # Zig bindings
 build.zig linguist-generated
 build.zig.zon linguist-generated
+
+# Nix stuff
+(^|/)nix/ linguist-vendored
+*.nix     linguist-vendored
