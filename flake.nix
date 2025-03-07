@@ -35,6 +35,8 @@
           );
 
         shellHook = ''
+          mkdir -p .nix-ts
+          export TREE_SITTER_DIR=$PWD/.nix-ts
           export LC_ALL=en_US.UTF-8
         '';
       };
