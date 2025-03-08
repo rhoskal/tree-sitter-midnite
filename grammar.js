@@ -18,7 +18,7 @@ module.exports = grammar({
     module_declaration: ($) =>
       seq(
         "module",
-        field("name", $.upper_qid),
+        field("name", $.qualified_module),
         "exposing",
         field("exports", $.exposing_list),
         repeat($.statement),
@@ -48,12 +48,13 @@ module.exports = grammar({
 
     // Section - Imports
 
-    include_statement: ($) => seq("include", field("module", $.upper_qid)),
+    include_statement: ($) =>
+      seq("include", field("module", $.qualified_module)),
 
     open_statement: ($) =>
       seq(
         "open",
-        field("module", $.upper_qid),
+        field("module", $.qualified_module),
         optional(field("modifier", $._import_modifier)),
       ),
 
@@ -204,7 +205,7 @@ module.exports = grammar({
         $.group_expression,
         $.list_expression,
         $.lower_identifier,
-        $.qualified_identifier,
+        $.qualified_function,
         $.upper_identifier,
         $._literal,
       ),
@@ -293,16 +294,18 @@ module.exports = grammar({
         ),
       ),
 
-    qualified_identifier: ($) =>
-      seq($.upper_identifier, ".", $.lower_identifier),
-
     function_call: ($) =>
       prec(
         2,
         seq(
-          choice($.lower_identifier, $.qualified_identifier),
+          field("function", choice($.lower_identifier, $.qualified_function)),
           "(",
-          optional(seq($._expression, repeat(seq(",", $._expression)))),
+          optional(
+            field(
+              "arguments",
+              seq($._expression, repeat(seq(",", $._expression))),
+            ),
+          ),
           ")",
         ),
       ),
@@ -379,7 +382,9 @@ module.exports = grammar({
 
     lower_identifier: (_) => /[a-z][a-zA-Z0-9_?]*/,
 
-    upper_qid: ($) => sepBy1(".", $.upper_identifier),
+    qualified_module: ($) => sepBy1(".", $.upper_identifier),
+
+    qualified_function: ($) => seq($.upper_identifier, ".", $.lower_identifier),
 
     // Section - Literals
 

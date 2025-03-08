@@ -56,7 +56,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -226,7 +226,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -378,76 +378,95 @@
   {
     "type": "function_call",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "anonymous_function",
-          "named": true
-        },
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "char_literal",
-          "named": true
-        },
-        {
-          "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "group_expression",
-          "named": true
-        },
-        {
-          "type": "if_expression",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "list_expression",
-          "named": true
-        },
-        {
-          "type": "lower_identifier",
-          "named": true
-        },
-        {
-          "type": "match_expression",
-          "named": true
-        },
-        {
-          "type": "qualified_identifier",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "tuple_expression",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
-          "named": true
-        },
-        {
-          "type": "upper_identifier",
-          "named": true
-        }
-      ]
+    "fields": {
+      "arguments": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "anonymous_function",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "group_expression",
+            "named": true
+          },
+          {
+            "type": "if_expression",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "list_expression",
+            "named": true
+          },
+          {
+            "type": "lower_identifier",
+            "named": true
+          },
+          {
+            "type": "match_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_function",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "tuple_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "upper_identifier",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "lower_identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_function",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -503,7 +522,7 @@
             "named": true
           },
           {
-            "type": "qualified_identifier",
+            "type": "qualified_function",
             "named": true
           },
           {
@@ -609,7 +628,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -699,7 +718,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -791,7 +810,7 @@
         "required": true,
         "types": [
           {
-            "type": "upper_qid",
+            "type": "qualified_module",
             "named": true
           }
         ]
@@ -861,7 +880,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -963,7 +982,7 @@
             "named": true
           },
           {
-            "type": "qualified_identifier",
+            "type": "qualified_function",
             "named": true
           },
           {
@@ -1069,7 +1088,7 @@
             "named": true
           },
           {
-            "type": "qualified_identifier",
+            "type": "qualified_function",
             "named": true
           },
           {
@@ -1111,7 +1130,7 @@
         "required": true,
         "types": [
           {
-            "type": "upper_qid",
+            "type": "qualified_module",
             "named": true
           }
         ]
@@ -1191,7 +1210,7 @@
         "required": true,
         "types": [
           {
-            "type": "upper_qid",
+            "type": "qualified_module",
             "named": true
           }
         ]
@@ -1253,7 +1272,7 @@
     }
   },
   {
-    "type": "qualified_identifier",
+    "type": "qualified_function",
     "named": true,
     "fields": {},
     "children": {
@@ -1264,6 +1283,21 @@
           "type": "lower_identifier",
           "named": true
         },
+        {
+          "type": "upper_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "qualified_module",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
         {
           "type": "upper_identifier",
           "named": true
@@ -1429,7 +1463,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -1728,7 +1762,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {
@@ -1743,21 +1777,6 @@
           "type": "unary_expression",
           "named": true
         },
-        {
-          "type": "upper_identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "upper_qid",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
         {
           "type": "upper_identifier",
           "named": true
@@ -1833,7 +1852,7 @@
           "named": true
         },
         {
-          "type": "qualified_identifier",
+          "type": "qualified_function",
           "named": true
         },
         {

@@ -117,10 +117,7 @@
   "=>" @operator)
 
 (function_call
-  (lower_identifier) @function)
-
-(function_call
-  (qualified_identifier) @function)
+  (qualified_function) @function)
 
 ;; Section - Expressions
 
@@ -129,11 +126,6 @@
 
 (binary_expression
   operator: _ @operator)
-
-(qualified_identifier
-  (upper_identifier) @namespace
-  "." @punctuation.delimiter
-  (lower_identifier) @function)
 
 (group_expression
   "(" @punctuation.bracket
@@ -187,7 +179,12 @@
 
 (upper_identifier) @type
 (lower_identifier) @variable
-(upper_qid) @namespace
+
+(qualified_module) @namespace
+(qualified_function
+  (upper_identifier) @namespace
+  "." @punctuation.delimiter
+  (lower_identifier) @function)
 
 (integer_literal) @number
 (float_literal) @number
