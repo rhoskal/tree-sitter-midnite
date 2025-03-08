@@ -1093,7 +1093,7 @@
         }
       ]
     },
-    "anonymous_function": {
+    "lambda_function": {
       "type": "SEQ",
       "members": [
         {
@@ -1163,11 +1163,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "unary_expression"
+          "name": "if_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "binary_expression"
+          "name": "lambda_function"
         },
         {
           "type": "SYMBOL",
@@ -1175,19 +1175,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "anonymous_function"
+          "name": "binary_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "if_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "tuple_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "group_expression"
+          "name": "unary_expression"
         },
         {
           "type": "SYMBOL",
@@ -1195,7 +1187,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "lower_identifier"
+          "name": "tuple_expression"
         },
         {
           "type": "SYMBOL",
@@ -1203,7 +1195,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "lower_identifier"
+        },
+        {
+          "type": "SYMBOL",
           "name": "upper_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "group_expression"
         },
         {
           "type": "SYMBOL",

@@ -20,7 +20,7 @@
 
 ;; Function bodies indent after =>
 
-(anonymous_function "=>" @indent)
+(lambda_function "=>" @indent)
 (match_case "=>" @indent)
 
 ;; Type definitions

@@ -182,7 +182,7 @@ module.exports = grammar({
 
     return_type: ($) => seq("->", $.type_expression),
 
-    anonymous_function: ($) =>
+    lambda_function: ($) =>
       seq(
         "fn",
         "(",
@@ -195,18 +195,25 @@ module.exports = grammar({
 
     _expression: ($) =>
       choice(
+        // Higher-level language constructs first
         $.match_expression,
-        $.unary_expression,
-        $.binary_expression,
-        $.function_call,
-        $.anonymous_function,
         $.if_expression,
-        $.tuple_expression,
-        $.group_expression,
+        $.lambda_function,
+
+        // Function calls and operations
+        $.function_call,
+        $.binary_expression,
+        $.unary_expression,
+
+        // Data structures
         $.list_expression,
-        $.lower_identifier,
+        $.tuple_expression,
+
+        // Identifiers and literals
         $.qualified_function,
+        $.lower_identifier,
         $.upper_identifier,
+        $.group_expression,
         $._literal,
       ),
 

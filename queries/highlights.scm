@@ -112,7 +112,7 @@
 (return_type
   "->" @operator)
 
-(anonymous_function
+(lambda_function
   "fn" @keyword
   "=>" @operator)
 

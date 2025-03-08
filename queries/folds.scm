@@ -11,7 +11,7 @@
 
 (function_declaration) @fold
 (foreign_function_declaration) @fold
-(anonymous_function) @fold
+(lambda_function) @fold
 
 ;; Comments
 
