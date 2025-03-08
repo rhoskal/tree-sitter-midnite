@@ -4,41 +4,53 @@
   outputs =
     { self, nixpkgs }:
     let
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs { inherit system; };
+      supportedSystems = [
+        "x86_64-darwin"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "aarch64-linux"
+      ];
+
+      forEachSupportedSystem =
+        f:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
+          f {
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
     in
     {
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs =
-          with pkgs;
-          [
-            nixd
-            nixfmt-rfc-style
-            nodejs_23
-            pnpm_10
-            tree-sitter
-          ]
-          ++ (
-            if stdenv.isLinux then
+      devShells = forEachSupportedSystem (
+        { pkgs }:
+        {
+          default = pkgs.mkShell {
+            buildInputs =
+              with pkgs;
               [
+                nixd
+                nixfmt-rfc-style
+                nodejs_23
+                pnpm_10
+                tree-sitter
+              ]
+              ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
                 inotify-tools
                 libnotify
               ]
-            else if stdenv.isDarwin then
-              [
+              ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
                 terminal-notifier
                 darwin.apple_sdk.frameworks.CoreFoundation
                 darwin.apple_sdk.frameworks.CoreServices
-              ]
-            else
-              [ ]
-          );
+              ];
 
-        shellHook = ''
-          mkdir -p .nix-tree-sitter
-          export TREE_SITTER_DIR=$PWD/.nix-tree-sitter
-          export LC_ALL=en_US.UTF-8
-        '';
-      };
+            shellHook = ''
+              mkdir -p .nix-tree-sitter
+              export TREE_SITTER_DIR=$PWD/.nix-tree-sitter
+              export LC_ALL=en_US.UTF-8
+            '';
+          };
+        }
+      );
     };
 }
