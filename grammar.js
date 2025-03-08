@@ -25,31 +25,53 @@ module.exports = grammar({
         "end",
       ),
 
-    module_path: ($) =>
-      seq($.upper_identifier, repeat(seq(".", $.upper_identifier))),
+    module_path: ($) => sepBy1(".", $.upper_identifier),
 
     export_list: ($) =>
-      choice(
-        $.expose_all,
-        seq("(", $.exposed_item, repeat(seq(",", $.exposed_item)), ")"),
-      ),
+      choice($.expose_all, seq("(", sepBy1(",", $.exposed_item), ")")),
 
     expose_all: (_) => "(..)",
 
-    exposed_item: ($) => choice($.lower_identifier, $.exposed_type),
-
-    exposed_type: ($) => seq($.upper_identifier, optional($.expose_all)),
+    exposed_item: ($) =>
+      seq(
+        choice($.lower_identifier, $.upper_identifier),
+        optional($.expose_all),
+      ),
 
     statement: ($) =>
       choice(
         $.include_statement,
+        $.open_statement,
         $.type_alias_declaration,
         $.type_declaration,
         $.foreign_function_declaration,
         $.function_declaration,
       ),
 
+    // Section - Imports
+
     include_statement: ($) => seq("include", $.module_path),
+
+    open_statement: ($) =>
+      seq(
+        "open",
+        $.module_path,
+        optional(
+          choice(
+            seq("as", $.upper_identifier),
+            seq("using", "(", sepBy1(",", $.import_item), ")"),
+            seq("hiding", "(", sepBy1(",", $.lower_identifier), ")"),
+          ),
+        ),
+      ),
+
+    import_item: ($) =>
+      choice(
+        $.lower_identifier,
+        seq($.lower_identifier, "as", $.lower_identifier),
+      ),
+
+    // Section - Types
 
     type_alias_declaration: ($) =>
       seq(
@@ -61,22 +83,14 @@ module.exports = grammar({
         $.type_expression,
       ),
 
-    type_parameters: ($) =>
-      seq("(", $.type_variable, repeat(seq(",", $.type_variable)), ")"),
+    type_parameters: ($) => seq("(", sepBy1(",", $.type_variable), ")"),
 
     type_variable: ($) => choice($.lower_identifier, $.upper_identifier),
 
     type_expression: ($) =>
       choice(
-        $.upper_identifier,
-        $.lower_identifier,
-        seq(
-          $.upper_identifier,
-          "(",
-          $.type_expression,
-          repeat(seq(",", $.type_expression)),
-          ")",
-        ),
+        choice($.lower_identifier, $.upper_identifier),
+        seq($.upper_identifier, "(", sepBy1(",", $.type_expression), ")"),
         $.record_type,
         $.tuple_type,
       ),
@@ -115,17 +129,11 @@ module.exports = grammar({
         seq($.type_expression, "::", $.type_expression),
       ),
 
-    record_type: ($) =>
-      seq(
-        "{",
-        optional(seq($.record_field, repeat(seq(",", $.record_field)))),
-        "}",
-      ),
+    record_type: ($) => seq("{", sepBy1(",", $.record_pair), "}"),
 
-    tuple_type: ($) =>
-      seq("(", $.type_expression, repeat1(seq(",", $.type_expression)), ")"),
+    record_pair: ($) => seq($.lower_identifier, ":", $.type_expression),
 
-    record_field: ($) => seq($.lower_identifier, ":", $.type_expression),
+    tuple_type: ($) => seq("(", sepBy1(",", $.type_expression), ")"),
 
     foreign_function_declaration: ($) =>
       seq(
@@ -152,16 +160,9 @@ module.exports = grammar({
       ),
 
     parameter_list: ($) =>
-      seq(
-        choice($.lower_identifier, "_"),
-        optional($.type_annotation),
-        repeat(
-          seq(
-            ",",
-            choice($.lower_identifier, "_"),
-            optional($.type_annotation),
-          ),
-        ),
+      sepBy1(
+        ",",
+        seq(choice($.lower_identifier, "_"), optional($.type_annotation)),
       ),
 
     type_annotation: ($) => seq(":", $.type_expression),
@@ -181,6 +182,7 @@ module.exports = grammar({
 
     _expression: ($) =>
       choice(
+        $.match_expression,
         $.unary_expression,
         $.binary_expression,
         $.function_call,
@@ -309,9 +311,52 @@ module.exports = grammar({
     if_expression: ($) =>
       seq("if", $._expression, "then", $._expression, "else", $._expression),
 
+    // Section - Pattern Matching
+
+    match_expression: ($) =>
+      prec.right(1, seq("match", $._expression, "on", repeat1($.match_case))),
+
+    match_case: ($) =>
+      seq("|", $.pattern, optional($.when_clause), "=>", $._expression),
+
+    pattern: ($) =>
+      choice(
+        $.wildcard_pattern,
+        $.literal_pattern,
+        $.variable_pattern,
+        $.constructor_pattern,
+        $.tuple_pattern,
+        $.cons_pattern,
+      ),
+
+    wildcard_pattern: (_) => "_",
+
+    literal_pattern: ($) => $._literal,
+
+    variable_pattern: ($) => $.lower_identifier,
+
+    constructor_pattern: ($) =>
+      seq(
+        $.upper_identifier,
+        optional(
+          seq("(", optional(seq($.pattern, repeat(seq(",", $.pattern)))), ")"),
+        ),
+      ),
+
+    tuple_pattern: ($) =>
+      seq("(", $.pattern, repeat1(seq(",", $.pattern)), ")"),
+
+    cons_pattern: ($) => prec.left(9, seq($.pattern, "::", $.pattern)),
+
+    when_clause: ($) => seq("when", $._expression),
+
+    // Section - Identifiers
+
     upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,
 
     lower_identifier: (_) => /[a-z][a-zA-Z0-9_?]*/,
+
+    // Section - Literals
 
     _literal: ($) =>
       choice(
@@ -351,8 +396,19 @@ module.exports = grammar({
     string_literal: ($) =>
       seq(
         '"',
-        repeat(choice($.escape_sequence, /[^"\\\n]/)), // String content excluding unescaped quotes and newlines
+        repeat(choice($._escape_sequence, /[^"\\\n]/)), // String content excluding unescaped quotes and newlines
         '"',
+      ),
+
+    _escape_sequence: (_) =>
+      token.immediate(
+        seq(
+          "\\",
+          choice(
+            /[nrt\\'"0]/,
+            /u\{[0-9a-fA-F]{1,6}\}/, // Unicode \u{XXXXXX} (up to 6 hex digits)
+          ),
+        ),
       ),
 
     char_literal: (_) =>
@@ -369,19 +425,30 @@ module.exports = grammar({
         ),
       ),
 
-    escape_sequence: (_) =>
-      token.immediate(
-        seq(
-          "\\",
-          choice(
-            /[nrt\\'"0]/,
-            /u\{[0-9a-fA-F]{1,6}\}/, // Unicode \u{XXXXXX} (up to 6 hex digits)
-          ),
-        ),
-      ),
+    // Section - Comments
 
     doc_comment: ($) => seq("##", /[^\n]*/),
 
     line_comment: ($) => seq("#", /[^\n]*/),
   },
 });
+
+/**
+ * Creates a rule to match one or more of the rules separated by the separator.
+ * @param {RuleOrLiteral} sep - The separator to use.
+ * @param {RuleOrLiteral} rule
+ * @returns {SeqRule}
+ */
+function sepBy1(sep, rule) {
+  return seq(rule, repeat(seq(sep, rule)));
+}
+
+/**
+ * Creates a rule to optionally match one or more of the rules separated by the separator.
+ * @param {RuleOrLiteral} sep - The separator to use.
+ * @param {RuleOrLiteral} rule
+ * @returns {ChoiceRule}
+ */
+function sepBy(sep, rule) {
+  return optional(sepBy1(sep, rule));
+}
