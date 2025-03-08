@@ -25,14 +25,10 @@ module.exports = grammar({
         "end",
       ),
 
-    module_path: ($) =>
-      seq($.upper_identifier, repeat(seq(".", $.upper_identifier))),
+    module_path: ($) => sepBy1(".", $.upper_identifier),
 
     export_list: ($) =>
-      choice(
-        $.expose_all,
-        seq("(", $.exposed_item, repeat(seq(",", $.exposed_item)), ")"),
-      ),
+      choice($.expose_all, seq("(", sepBy1(",", $.exposed_item), ")")),
 
     expose_all: (_) => "(..)",
 
@@ -51,7 +47,11 @@ module.exports = grammar({
         $.function_declaration,
       ),
 
+    // Section - Imports
+
     include_statement: ($) => seq("include", $.module_path),
+
+    // Section - Types
 
     type_alias_declaration: ($) =>
       seq(
@@ -63,22 +63,14 @@ module.exports = grammar({
         $.type_expression,
       ),
 
-    type_parameters: ($) =>
-      seq("(", $.type_variable, repeat(seq(",", $.type_variable)), ")"),
+    type_parameters: ($) => seq("(", sepBy1(",", $.type_variable), ")"),
 
     type_variable: ($) => choice($.lower_identifier, $.upper_identifier),
 
     type_expression: ($) =>
       choice(
-        $.upper_identifier,
-        $.lower_identifier,
-        seq(
-          $.upper_identifier,
-          "(",
-          $.type_expression,
-          repeat(seq(",", $.type_expression)),
-          ")",
-        ),
+        choice($.lower_identifier, $.upper_identifier),
+        seq($.upper_identifier, "(", sepBy1(",", $.type_expression), ")"),
         $.record_type,
         $.tuple_type,
       ),
@@ -117,17 +109,11 @@ module.exports = grammar({
         seq($.type_expression, "::", $.type_expression),
       ),
 
-    record_type: ($) =>
-      seq(
-        "{",
-        optional(seq($.record_field, repeat(seq(",", $.record_field)))),
-        "}",
-      ),
+    record_type: ($) => seq("{", sepBy(",", $.record_pair), "}"),
 
-    tuple_type: ($) =>
-      seq("(", $.type_expression, repeat1(seq(",", $.type_expression)), ")"),
+    record_pair: ($) => seq($.lower_identifier, ":", $.type_expression),
 
-    record_field: ($) => seq($.lower_identifier, ":", $.type_expression),
+    tuple_type: ($) => seq("(", sepBy1(",", $.type_expression), ")"),
 
     foreign_function_declaration: ($) =>
       seq(
@@ -154,16 +140,9 @@ module.exports = grammar({
       ),
 
     parameter_list: ($) =>
-      seq(
-        choice($.lower_identifier, "_"),
-        optional($.type_annotation),
-        repeat(
-          seq(
-            ",",
-            choice($.lower_identifier, "_"),
-            optional($.type_annotation),
-          ),
-        ),
+      sepBy1(
+        ",",
+        seq(choice($.lower_identifier, "_"), optional($.type_annotation)),
       ),
 
     type_annotation: ($) => seq(":", $.type_expression),
@@ -312,10 +291,6 @@ module.exports = grammar({
     if_expression: ($) =>
       seq("if", $._expression, "then", $._expression, "else", $._expression),
 
-    upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,
-
-    lower_identifier: (_) => /[a-z][a-zA-Z0-9_?]*/,
-
     // Section - Pattern Matching
 
     match_expression: ($) =>
@@ -354,6 +329,12 @@ module.exports = grammar({
     cons_pattern: ($) => prec.left(9, seq($.pattern, "::", $.pattern)),
 
     when_clause: ($) => seq("when", $._expression),
+
+    // Section - Identifiers
+
+    upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,
+
+    lower_identifier: (_) => /[a-z][a-zA-Z0-9_?]*/,
 
     // Section - Literals
 
@@ -395,8 +376,19 @@ module.exports = grammar({
     string_literal: ($) =>
       seq(
         '"',
-        repeat(choice($.escape_sequence, /[^"\\\n]/)), // String content excluding unescaped quotes and newlines
+        repeat(choice($._escape_sequence, /[^"\\\n]/)), // String content excluding unescaped quotes and newlines
         '"',
+      ),
+
+    _escape_sequence: (_) =>
+      token.immediate(
+        seq(
+          "\\",
+          choice(
+            /[nrt\\'"0]/,
+            /u\{[0-9a-fA-F]{1,6}\}/, // Unicode \u{XXXXXX} (up to 6 hex digits)
+          ),
+        ),
       ),
 
     char_literal: (_) =>
@@ -413,17 +405,6 @@ module.exports = grammar({
         ),
       ),
 
-    escape_sequence: (_) =>
-      token.immediate(
-        seq(
-          "\\",
-          choice(
-            /[nrt\\'"0]/,
-            /u\{[0-9a-fA-F]{1,6}\}/, // Unicode \u{XXXXXX} (up to 6 hex digits)
-          ),
-        ),
-      ),
-
     // Section - Comments
 
     doc_comment: ($) => seq("##", /[^\n]*/),
@@ -431,3 +412,23 @@ module.exports = grammar({
     line_comment: ($) => seq("#", /[^\n]*/),
   },
 });
+
+/**
+ * Creates a rule to match one or more of the rules separated by the separator.
+ * @param {RuleOrLiteral} sep - The separator to use.
+ * @param {RuleOrLiteral} rule
+ * @returns {SeqRule}
+ */
+function sepBy1(sep, rule) {
+  return seq(rule, repeat(seq(sep, rule)));
+}
+
+/**
+ * Creates a rule to optionally match one or more of the rules separated by the separator.
+ * @param {RuleOrLiteral} sep - The separator to use.
+ * @param {RuleOrLiteral} rule
+ * @returns {ChoiceRule}
+ */
+function sepBy(sep, rule) {
+  return optional(sepBy1(sep, rule));
+}

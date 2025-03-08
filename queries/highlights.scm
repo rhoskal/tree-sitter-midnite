@@ -19,7 +19,7 @@
 
 (type_variable) @variable.parameter
 
-(record_field
+(record_pair
   ":" @operator)
 
 (tuple_type

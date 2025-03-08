@@ -958,7 +958,7 @@
     }
   },
   {
-    "type": "record_field",
+    "type": "record_pair",
     "named": true,
     "fields": {},
     "children": {
@@ -985,7 +985,7 @@
       "required": false,
       "types": [
         {
-          "type": "record_field",
+          "type": "record_pair",
           "named": true
         }
       ]
@@ -1056,17 +1056,7 @@
   {
     "type": "string_literal",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "escape_sequence",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "tuple_expression",
@@ -1642,10 +1632,6 @@
   {
     "type": "end",
     "named": false
-  },
-  {
-    "type": "escape_sequence",
-    "named": true
   },
   {
     "type": "expose_all",
