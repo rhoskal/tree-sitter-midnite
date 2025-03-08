@@ -578,7 +578,15 @@
       "required": true,
       "types": [
         {
+          "type": "expose_all",
+          "named": true
+        },
+        {
           "type": "lower_identifier",
+          "named": true
+        },
+        {
+          "type": "upper_identifier",
           "named": true
         }
       ]

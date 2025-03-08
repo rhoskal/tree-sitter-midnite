@@ -1,0 +1,68 @@
+================================================================
+Imports
+================================================================
+
+module Main exposing (..)
+    include Foo.Bar
+
+    open Foo
+    open Baz as B
+
+    open Std.List using (map, filter, Maybe, Either(..))
+    open Std.List using (map as list_map, filter)
+
+    open Foo.Bar hiding (internal_func)
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (module_path
+      (upper_identifier))
+    (export_list
+      (expose_all))
+    (statement
+      (include_statement
+        (module_path
+          (upper_identifier)
+          (upper_identifier))))
+    (statement
+      (open_statement
+        (module_path
+          (upper_identifier))))
+    (statement
+      (open_statement
+        (module_path
+          (upper_identifier))
+        (upper_identifier)))
+    (statement
+      (open_statement
+        (module_path
+          (upper_identifier)
+          (upper_identifier))
+        (import_item
+          (lower_identifier))
+        (import_item
+          (lower_identifier))
+        (import_item
+          (upper_identifier))
+        (import_item
+          (upper_identifier)
+          (expose_all))))
+    (statement
+      (open_statement
+        (module_path
+          (upper_identifier)
+          (upper_identifier))
+        (import_item
+          (lower_identifier)
+          (lower_identifier))
+        (import_item
+          (lower_identifier))))
+    (statement
+      (open_statement
+        (module_path
+          (upper_identifier)
+          (upper_identifier))
+        (lower_identifier)))))

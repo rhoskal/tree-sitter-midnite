@@ -1,0 +1,46 @@
+================================================================
+Function Declarations
+================================================================
+
+module Main exposing (..)
+    foreign sqrt(x : Float) -> Float =
+        "c_sqrt"
+
+    let double(x : Int) -> Int =
+        x * 2
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (module_path
+      (upper_identifier))
+    (export_list
+      (expose_all))
+    (statement
+      (foreign_function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (string_literal)))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (binary_expression
+          (lower_identifier)
+          (integer_literal))))))

@@ -69,6 +69,8 @@ module.exports = grammar({
       choice(
         $.lower_identifier,
         seq($.lower_identifier, "as", $.lower_identifier),
+        $.upper_identifier,
+        seq($.upper_identifier, optional($.expose_all)),
       ),
 
     // Section - Types
