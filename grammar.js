@@ -41,7 +41,81 @@ module.exports = grammar({
     exposed_type: ($) => seq($.upper_identifier, optional($.expose_all)),
 
     statement: ($) =>
-      choice($.foreign_function_declaration, $.function_declaration),
+      choice(
+        $.include_statement,
+        $.type_alias_declaration,
+        $.type_declaration,
+        $.foreign_function_declaration,
+        $.function_declaration,
+      ),
+
+    include_statement: ($) => seq("include", $.module_path),
+
+    type_alias_declaration: ($) =>
+      seq(
+        "type",
+        "alias",
+        $.upper_identifier,
+        optional($.type_parameters),
+        "=",
+        $.type_expression,
+      ),
+
+    type_parameters: ($) =>
+      seq("(", $.upper_identifier, repeat(seq(",", $.upper_identifier)), ")"),
+
+    type_expression: ($) =>
+      choice(
+        $.upper_identifier,
+        seq(
+          $.upper_identifier,
+          "(",
+          $.type_expression,
+          repeat(seq(",", $.type_expression)),
+          ")",
+        ),
+        $.record_type,
+      ),
+
+    type_declaration: ($) =>
+      seq(
+        "type",
+        $.upper_identifier,
+        optional($.type_parameters),
+        "=",
+        $.type_variants,
+      ),
+
+    type_variants: ($) =>
+      choice(
+        seq("|", $.type_variant, repeat(seq("|", $.type_variant))),
+        seq($.type_variant, repeat(seq("|", $.type_variant))),
+      ),
+
+    type_variant: ($) =>
+      seq(
+        $.upper_identifier,
+        optional(
+          choice(
+            seq(
+              "(",
+              $.type_expression,
+              repeat(seq(",", $.type_expression)),
+              ")",
+            ),
+            $.record_type,
+          ),
+        ),
+      ),
+
+    record_type: ($) =>
+      seq(
+        "{",
+        optional(seq($.record_field, repeat(seq(",", $.record_field)))),
+        "}",
+      ),
+
+    record_field: ($) => seq($.lower_identifier, ":", $.type_expression),
 
     foreign_function_declaration: ($) =>
       seq(
@@ -69,12 +143,19 @@ module.exports = grammar({
 
     parameter_list: ($) =>
       seq(
-        $.lower_identifier,
+        choice($.lower_identifier, "_"),
         optional($.type_annotation),
-        repeat(seq(",", $.lower_identifier, optional($.type_annotation))),
+        repeat(
+          seq(
+            ",",
+            choice($.lower_identifier, "_"),
+            optional($.type_annotation),
+          ),
+        ),
       ),
 
-    type_annotation: ($) => seq(":", $.upper_identifier),
+    type_annotation: ($) =>
+      seq(":", choice($.upper_identifier, $.lower_identifier)),
 
     return_type: ($) => seq("->", $.upper_identifier),
 
@@ -82,7 +163,10 @@ module.exports = grammar({
       choice(
         $.unary_expression,
         $.binary_expression,
+        $.tuple_expression,
+        $.list_expression,
         $.lower_identifier,
+        $.upper_identifier,
         $._literal,
       ),
 
@@ -164,6 +248,20 @@ module.exports = grammar({
           3,
           seq($._expression, field("operator", "||"), $._expression),
         ),
+      ),
+
+    tuple_expression: ($) =>
+      seq(
+        "(",
+        optional(seq($._expression, repeat(seq(",", $._expression)))),
+        ")",
+      ),
+
+    list_expression: ($) =>
+      seq(
+        "[",
+        optional(seq($._expression, repeat(seq(",", $._expression)))),
+        "]",
       ),
 
     upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,

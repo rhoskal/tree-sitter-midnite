@@ -3,6 +3,23 @@
   "exposing" @keyword
   "end" @keyword)
 
+(include_statement
+  "include" @keyword)
+
+(type_alias_declaration
+  "type" @keyword
+  "alias" @keyword
+  "=" @operator)
+
+(type_declaration
+  "type" @keyword
+  "=" @operator)
+
+(type_variant) @constructor
+
+(record_field
+  ":" @operator)
+
 (foreign_function_declaration
   "foreign" @keyword
   "=" @operator)
@@ -19,6 +36,26 @@
 
 (binary_expression
   operator: _ @operator)
+
+(tuple_expression
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
+(list_expression
+  "[" @punctuation.bracket
+  "]" @punctuation.bracket)
+
+"(" @punctuation.bracket
+")" @punctuation.bracket
+"{" @punctuation.bracket
+"}" @punctuation.bracket
+"[" @punctuation.bracket
+"]" @punctuation.bracket
+"," @punctuation.delimiter
+"." @punctuation.delimiter
+"|" @punctuation.delimiter
+
+"_" @variable.builtin
 
 ; Literals
 
