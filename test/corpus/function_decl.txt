@@ -8,6 +8,9 @@ module Main exposing (..)
 
     let double(x : Int) -> Int =
         x * 2
+
+    let apply(f, x) =
+        f(x)
 end
 
 ----------------------------------------------------------------
@@ -43,4 +46,13 @@ end
             (upper_identifier)))
         (binary_expression
           (lower_identifier)
-          (integer_literal))))))
+          (integer_literal))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (function_call
+          (lower_identifier)
+          (lower_identifier))))))
