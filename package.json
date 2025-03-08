@@ -26,8 +26,7 @@
     "*.wasm"
   ],
   "dependencies": {
-    "node-addon-api": "^8.2.1",
-    "node-gyp-build": "^4.8.2"
+    "node-addon-api": "^8.3.1"
   },
   "devDependencies": {
     "husky": "^9.1.7",
@@ -47,14 +46,16 @@
   },
   "scripts": {
     "format": "prettier --write '**/*.js'",
-    "install": "node-gyp-build",
-    "prepare": "is-ci || husky",
-    "prestart": "tree-sitter build --wasm",
-    "start": "tree-sitter playground"
+    "prepare": "is-ci || husky"
   },
   "lint-staged": {
     "**/*.js": [
       "prettier --write"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "tree-sitter"
     ]
   }
 }

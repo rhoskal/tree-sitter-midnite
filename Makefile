@@ -49,3 +49,7 @@ format: ## Format typescript files
 .PHONY: test
 test: ## Run tree-sitter test
 	tree-sitter test -r
+
+.PHONY: playground
+playground: ## Run tree-sitter playground
+	tree-sitter playground
