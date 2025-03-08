@@ -3,7 +3,7 @@ Simple Module
 ==================
 
 module Foo.Bar exposing (..)
-  let add(x, y) = x + y
+    let add(x, y) = x + y
 end
 
 ---
