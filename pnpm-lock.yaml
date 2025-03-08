@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      node-addon-api:
+        specifier: ^8.3.1
+        version: 8.3.1
+      tree-sitter:
+        specifier: ^0.21.1
+        version: 0.21.1
     devDependencies:
       husky:
         specifier: ^9.1.7
@@ -23,6 +30,9 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
+      tree-sitter-cli:
+        specifier: ^0.25.3
+        version: 0.25.3
 
 packages:
 
@@ -205,6 +215,14 @@ packages:
     resolution: {integrity: sha512-c5XK0MjkGBrQPGYG24GBADZud0NCbznxNx0ZkS+ebUTrmV1qTDxPxSL8zEAPURXSbLRWVexxmP4986BziahL5w==}
     engines: {node: '>=10'}
 
+  node-addon-api@8.3.1:
+    resolution: {integrity: sha512-lytcDEdxKjGJPTLEfW4mYMigRezMlyJY8W4wxJK8zE533Jlb8L8dRuObJFWg2P+AuOIxoCgKF+2Oq4d4Zd0OUA==}
+    engines: {node: ^18 || ^20 || >= 21}
+
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
+
   npm-run-path@3.1.0:
     resolution: {integrity: sha512-Dbl4A/VfiVGLgQv29URL9xshU8XDY1GeLy+fsaZ1AA8JDSfjvr5P5+pzRbWqRSBxk6/DW7MIh8lTM/PaGnP2kg==}
     engines: {node: '>=8'}
@@ -321,6 +339,14 @@ packages:
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
+
+  tree-sitter-cli@0.25.3:
+    resolution: {integrity: sha512-Bk6ZUXG+cKnwZpfR/te4NDrKld90p6350eqWlbLwSpV9/8vmL/x8LCw+3k7quY9oMDaYoMXHMvokXJbkM5A7bA==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+
+  tree-sitter@0.21.1:
+    resolution: {integrity: sha512-7dxoA6kYvtgWw80265MyqJlkRl4yawIjO7S5MigytjELkX43fV2WsAXzsNfO7sBpPPCF5Gp0+XzHk0DwLCq3xQ==}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -509,6 +535,10 @@ snapshots:
     dependencies:
       semver: 7.7.1
 
+  node-addon-api@8.3.1: {}
+
+  node-gyp-build@4.8.4: {}
+
   npm-run-path@3.1.0:
     dependencies:
       path-key: 3.1.1
@@ -624,6 +654,13 @@ snapshots:
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
+
+  tree-sitter-cli@0.25.3: {}
+
+  tree-sitter@0.21.1:
+    dependencies:
+      node-addon-api: 8.3.1
+      node-gyp-build: 4.8.4
 
   util-deprecate@1.0.2: {}
 
