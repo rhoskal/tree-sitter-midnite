@@ -160,10 +160,9 @@ module.exports = grammar({
         ),
       ),
 
-    type_annotation: ($) =>
-      seq(":", choice($.upper_identifier, $.lower_identifier)),
+    type_annotation: ($) => seq(":", $.type_expression),
 
-    return_type: ($) => seq("->", $.upper_identifier),
+    return_type: ($) => seq("->", $.type_expression),
 
     _expression: ($) =>
       choice(

@@ -719,17 +719,8 @@
           "value": ":"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "upper_identifier"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "lower_identifier"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type_expression"
         }
       ]
     },
@@ -742,7 +733,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "upper_identifier"
+          "name": "type_expression"
         }
       ]
     },
