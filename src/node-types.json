@@ -570,6 +570,21 @@
     }
   },
   {
+    "type": "import_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lower_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "include_statement",
     "named": true,
     "fields": {},
@@ -885,6 +900,33 @@
     }
   },
   {
+    "type": "open_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "import_item",
+          "named": true
+        },
+        {
+          "type": "lower_identifier",
+          "named": true
+        },
+        {
+          "type": "module_path",
+          "named": true
+        },
+        {
+          "type": "upper_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter_list",
     "named": true,
     "fields": {},
@@ -982,7 +1024,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "record_pair",
@@ -1040,6 +1082,10 @@
         },
         {
           "type": "include_statement",
+          "named": true
+        },
+        {
+          "type": "open_statement",
           "named": true
         },
         {
@@ -1622,6 +1668,10 @@
     "named": false
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "char_literal",
     "named": true
   },
@@ -1654,6 +1704,10 @@
     "named": false
   },
   {
+    "type": "hiding",
+    "named": false
+  },
+  {
     "type": "if",
     "named": false
   },
@@ -1682,6 +1736,10 @@
     "named": false
   },
   {
+    "type": "open",
+    "named": false
+  },
+  {
     "type": "then",
     "named": false
   },
@@ -1692,6 +1750,10 @@
   {
     "type": "upper_identifier",
     "named": true
+  },
+  {
+    "type": "using",
+    "named": false
   },
   {
     "type": "when",

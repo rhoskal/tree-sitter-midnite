@@ -1,10 +1,45 @@
+;; Section - Module Structure
+
 (module_declaration
   "module" @keyword
   "exposing" @keyword
   "end" @keyword)
 
+;; Section - Imports
+
 (include_statement
   "include" @keyword)
+
+(open_statement
+  "open" @keyword)
+
+(open_statement
+  "as" @keyword
+  (upper_identifier) @namespace)
+
+(open_statement
+  "using" @keyword
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
+(import_item
+  (lower_identifier) @function)
+
+(import_item
+  (lower_identifier) @function
+  "as" @keyword
+  (lower_identifier) @function)
+
+(open_statement
+  "hiding" @keyword
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
+(open_statement
+  "hiding" @keyword
+  (lower_identifier) @variable)
+
+;; Section - Types
 
 (type_alias_declaration
   "type" @keyword
@@ -26,6 +61,8 @@
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
 
+;; Section - Functions
+
 (foreign_function_declaration
   "foreign" @keyword
   "=" @operator)
@@ -44,15 +81,17 @@
   "fn" @keyword
   "=>" @operator)
 
+(function_call
+  (qualified_identifier) @function)
+
+;; Section - Expressions
+
 (binary_expression
   operator: _ @operator)
 
 (qualified_identifier
   (upper_identifier) @namespace
   "." @punctuation.delimiter)
-
-(function_call
-  (qualified_identifier) @function)
 
 (tuple_expression
   "(" @punctuation.bracket
@@ -66,6 +105,8 @@
   "if" @keyword
   "then" @keyword
   "else" @keyword)
+
+;; Section - Match Expressions
 
 (match_expression
   "match" @keyword
@@ -90,6 +131,8 @@
 (when_clause
   "when" @keyword)
 
+;; Section - Punctuation
+
 "(" @punctuation.bracket
 ")" @punctuation.bracket
 "{" @punctuation.bracket
@@ -100,9 +143,12 @@
 "." @punctuation.delimiter
 "|" @punctuation.delimiter
 
+;; Section - Identifiers and Literals
+
 "_" @variable.builtin
 
-; Literals
+(upper_identifier) @type
+(lower_identifier) @variable
 
 (integer_literal) @number
 (float_literal) @number
@@ -110,12 +156,7 @@
 (char_literal) @string
 (string_literal) @string
 
-; Identifiers
-
-(upper_identifier) @type
-(lower_identifier) @variable
-
-; Comments
+;; Section - Comments
 
 (doc_comment) @comment.doc
 (line_comment) @comment

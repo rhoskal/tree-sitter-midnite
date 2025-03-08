@@ -41,6 +41,7 @@ module.exports = grammar({
     statement: ($) =>
       choice(
         $.include_statement,
+        $.open_statement,
         $.type_alias_declaration,
         $.type_declaration,
         $.foreign_function_declaration,
@@ -50,6 +51,25 @@ module.exports = grammar({
     // Section - Imports
 
     include_statement: ($) => seq("include", $.module_path),
+
+    open_statement: ($) =>
+      seq(
+        "open",
+        $.module_path,
+        optional(
+          choice(
+            seq("as", $.upper_identifier),
+            seq("using", "(", sepBy1(",", $.import_item), ")"),
+            seq("hiding", "(", sepBy1(",", $.lower_identifier), ")"),
+          ),
+        ),
+      ),
+
+    import_item: ($) =>
+      choice(
+        $.lower_identifier,
+        seq($.lower_identifier, "as", $.lower_identifier),
+      ),
 
     // Section - Types
 
@@ -109,7 +129,7 @@ module.exports = grammar({
         seq($.type_expression, "::", $.type_expression),
       ),
 
-    record_type: ($) => seq("{", sepBy(",", $.record_pair), "}"),
+    record_type: ($) => seq("{", sepBy1(",", $.record_pair), "}"),
 
     record_pair: ($) => seq($.lower_identifier, ":", $.type_expression),
 
