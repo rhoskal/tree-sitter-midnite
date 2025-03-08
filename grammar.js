@@ -89,10 +89,10 @@ module.exports = grammar({
       seq(
         "type",
         "alias",
-        $.upper_identifier,
-        optional($.type_parameters),
+        field("name", $.upper_identifier),
+        optional(field("parameters", $.type_parameters)),
         "=",
-        $.type_expression,
+        field("definition", $.type_expression),
       ),
 
     type_parameters: ($) => seq("(", sepBy1(",", $.type_variable), ")"),
@@ -110,10 +110,10 @@ module.exports = grammar({
     type_declaration: ($) =>
       seq(
         "type",
-        $.upper_identifier,
-        optional($.type_parameters),
+        field("name", $.upper_identifier),
+        optional(field("parameters", $.type_parameters)),
         "=",
-        choice($.type_variants, $.record_type),
+        field("definition", choice($.type_variants, $.record_type)),
       ),
 
     type_variants: ($) =>
@@ -150,25 +150,25 @@ module.exports = grammar({
     foreign_function_declaration: ($) =>
       seq(
         "foreign",
-        $.lower_identifier,
+        field("name", $.lower_identifier),
         "(",
-        $.parameter_list,
+        field("parameters", $.parameter_list),
         ")",
-        $.return_type,
+        field("return_type", $.return_type),
         "=",
-        $.string_literal,
+        field("external_name", $.string_literal),
       ),
 
     function_declaration: ($) =>
       seq(
         "let",
-        $.lower_identifier,
+        field("name", $.lower_identifier),
         "(",
-        optional($.parameter_list),
+        optional(field("parameters", $.parameter_list)),
         ")",
-        optional($.return_type),
+        optional(field("return_type", $.return_type)),
         "=",
-        $._expression,
+        field("body", $._expression),
       ),
 
     parameter_list: ($) =>
@@ -324,10 +324,24 @@ module.exports = grammar({
     // Section - Pattern Matching
 
     match_expression: ($) =>
-      prec.right(1, seq("match", $._expression, "on", repeat1($.match_case))),
+      prec.right(
+        1,
+        seq(
+          "match",
+          field("subject", $._expression),
+          "on",
+          field("cases", repeat1($.match_case)),
+        ),
+      ),
 
     match_case: ($) =>
-      seq("|", $.pattern, optional($.when_clause), "=>", $._expression),
+      seq(
+        "|",
+        field("pattern", $.pattern),
+        optional(field("condition", $.when_clause)),
+        "=>",
+        field("body", $._expression),
+      ),
 
     pattern: ($) =>
       choice(
