@@ -62,11 +62,14 @@ module.exports = grammar({
       ),
 
     type_parameters: ($) =>
-      seq("(", $.upper_identifier, repeat(seq(",", $.upper_identifier)), ")"),
+      seq("(", $.type_variable, repeat(seq(",", $.type_variable)), ")"),
+
+    type_variable: ($) => choice($.lower_identifier, $.upper_identifier),
 
     type_expression: ($) =>
       choice(
         $.upper_identifier,
+        $.lower_identifier,
         seq(
           $.upper_identifier,
           "(",
@@ -93,19 +96,22 @@ module.exports = grammar({
       ),
 
     type_variant: ($) =>
-      seq(
-        $.upper_identifier,
-        optional(
-          choice(
-            seq(
-              "(",
-              $.type_expression,
-              repeat(seq(",", $.type_expression)),
-              ")",
+      choice(
+        seq(
+          $.upper_identifier,
+          optional(
+            choice(
+              seq(
+                "(",
+                $.type_expression,
+                repeat(seq(",", $.type_expression)),
+                ")",
+              ),
+              $.record_type,
             ),
-            $.record_type,
           ),
         ),
+        seq($.type_expression, "::", $.type_expression),
       ),
 
     record_type: ($) =>

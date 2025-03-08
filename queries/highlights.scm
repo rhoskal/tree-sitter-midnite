@@ -17,6 +17,8 @@
 
 (type_variant) @constructor
 
+(type_variable) @variable.parameter
+
 (record_field
   ":" @operator)
 

@@ -764,6 +764,10 @@
       "required": true,
       "types": [
         {
+          "type": "lower_identifier",
+          "named": true
+        },
+        {
           "type": "record_type",
           "named": true
         },
@@ -786,6 +790,25 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "type_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "lower_identifier",
+          "named": true
+        },
         {
           "type": "upper_identifier",
           "named": true
