@@ -17,9 +17,9 @@ end
 
 (source_file
   (module_declaration
-    (module_path
+    (upper_qid
       (upper_identifier))
-    (export_list
+    (exposing_list
       (expose_all))
     (statement
       (foreign_function_declaration

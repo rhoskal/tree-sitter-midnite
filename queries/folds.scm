@@ -30,7 +30,7 @@
 
 ;; Lists with multiple items
 
-(export_list) @fold
+(exposing_list) @fold
 (type_parameters) @fold
 (parameter_list) @fold
 (type_variants) @fold

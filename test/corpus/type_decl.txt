@@ -22,9 +22,9 @@ end
 
 (source_file
   (module_declaration
-    (module_path
+    (upper_qid
       (upper_identifier))
-    (export_list
+    (exposing_list
       (expose_all))
     (statement
       (type_alias_declaration
@@ -99,9 +99,9 @@ end
 
 (source_file
   (module_declaration
-    (module_path
+    (upper_qid
       (upper_identifier))
-    (export_list
+    (exposing_list
       (expose_all))
     (statement
       (type_declaration
@@ -172,9 +172,9 @@ end
 
 (source_file
   (module_declaration
-    (module_path
+    (upper_qid
       (upper_identifier))
-    (export_list
+    (exposing_list
       (expose_all))
     (statement
       (type_declaration

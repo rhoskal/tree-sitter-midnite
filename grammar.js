@@ -18,16 +18,14 @@ module.exports = grammar({
     module_declaration: ($) =>
       seq(
         "module",
-        $.module_path,
+        field("name", $.upper_qid),
         "exposing",
-        $.export_list,
+        field("exports", $.exposing_list),
         repeat($.statement),
         "end",
       ),
 
-    module_path: ($) => sepBy1(".", $.upper_identifier),
-
-    export_list: ($) =>
+    exposing_list: ($) =>
       choice($.expose_all, seq("(", sepBy1(",", $.exposed_item), ")")),
 
     expose_all: (_) => "(..)",
@@ -50,28 +48,40 @@ module.exports = grammar({
 
     // Section - Imports
 
-    include_statement: ($) => seq("include", $.module_path),
+    include_statement: ($) => seq("include", field("module", $.upper_qid)),
 
     open_statement: ($) =>
       seq(
         "open",
-        $.module_path,
-        optional(
-          choice(
-            seq("as", $.upper_identifier),
-            seq("using", "(", sepBy1(",", $.import_item), ")"),
-            seq("hiding", "(", sepBy1(",", $.lower_identifier), ")"),
-          ),
-        ),
+        field("module", $.upper_qid),
+        optional(field("modifier", $._import_modifier)),
       ),
+
+    _import_modifier: ($) =>
+      choice(
+        seq("as", field("alias", $.upper_identifier)),
+        seq("using", field("items", $.import_list)),
+        seq("hiding", field("items", $.hiding_list)),
+      ),
+
+    import_list: ($) => seq("(", sepBy1(",", $.import_item), ")"),
 
     import_item: ($) =>
       choice(
-        $.lower_identifier,
-        seq($.lower_identifier, "as", $.lower_identifier),
-        $.upper_identifier,
-        seq($.upper_identifier, optional($.expose_all)),
+        field("value", $.lower_identifier),
+        seq(
+          field("value", $.lower_identifier),
+          "as",
+          field("alias", $.lower_identifier),
+        ),
+        field("type", $.upper_identifier),
+        seq(
+          field("type", $.upper_identifier),
+          field("constructors", optional($.expose_all)),
+        ),
       ),
+
+    hiding_list: ($) => seq("(", sepBy1(",", $.lower_identifier), ")"),
 
     // Section - Types
 
@@ -354,6 +364,8 @@ module.exports = grammar({
     upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,
 
     lower_identifier: (_) => /[a-z][a-zA-Z0-9_?]*/,
+
+    upper_qid: ($) => sepBy1(".", $.upper_identifier),
 
     // Section - Literals
 

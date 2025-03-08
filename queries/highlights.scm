@@ -5,6 +5,18 @@
   "exposing" @keyword
   "end" @keyword)
 
+(exposing_list
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
+(expose_all) @operator
+
+(exposed_item
+  (lower_identifier) @function)
+
+(exposed_item
+  (upper_identifier) @type)
+
 ;; Section - Imports
 
 (include_statement
@@ -18,9 +30,18 @@
   (upper_identifier) @namespace)
 
 (open_statement
+  "open" @keyword
   "using" @keyword
-  "(" @punctuation.bracket
-  ")" @punctuation.bracket)
+  (import_list
+    "(" @punctuation.bracket
+    ")" @punctuation.bracket))
+
+(open_statement
+  "open" @keyword
+  "hiding" @keyword
+  (hiding_list
+    "(" @punctuation.bracket
+    ")" @punctuation.bracket))
 
 (import_item
   (lower_identifier) @function)
@@ -30,13 +51,18 @@
   "as" @keyword
   (lower_identifier) @function)
 
-(open_statement
-  "hiding" @keyword
+(import_item
+  (upper_identifier) @type)
+
+(import_item
+  (upper_identifier) @type
+  (expose_all) @operator)
+
+(hiding_list
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
 
-(open_statement
-  "hiding" @keyword
+(hiding_list
   (lower_identifier) @variable)
 
 ;; Section - Types
@@ -46,6 +72,10 @@
   "alias" @keyword
   "=" @operator)
 
+(type_parameters
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
 (type_declaration
   "type" @keyword
   "=" @operator)
@@ -54,7 +84,12 @@
 
 (type_variable) @variable.parameter
 
+(record_type
+  "{" @punctuation.bracket
+  "}" @punctuation.bracket)
+
 (record_pair
+  (lower_identifier) @property
   ":" @operator)
 
 (tuple_type
@@ -82,16 +117,27 @@
   "=>" @operator)
 
 (function_call
+  (lower_identifier) @function)
+
+(function_call
   (qualified_identifier) @function)
 
 ;; Section - Expressions
+
+(unary_expression
+  "-" @operator)
 
 (binary_expression
   operator: _ @operator)
 
 (qualified_identifier
   (upper_identifier) @namespace
-  "." @punctuation.delimiter)
+  "." @punctuation.delimiter
+  (lower_identifier) @function)
+
+(group_expression
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
 
 (tuple_expression
   "(" @punctuation.bracket
@@ -118,6 +164,10 @@
 
 (wildcard_pattern) @variable.builtin
 
+(literal_pattern) @constant
+
+(variable_pattern) @variable
+
 (constructor_pattern
   (upper_identifier) @constructor)
 
@@ -131,24 +181,13 @@
 (when_clause
   "when" @keyword)
 
-;; Section - Punctuation
-
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"," @punctuation.delimiter
-"." @punctuation.delimiter
-"|" @punctuation.delimiter
-
 ;; Section - Identifiers and Literals
 
 "_" @variable.builtin
 
 (upper_identifier) @type
 (lower_identifier) @variable
+(upper_qid) @namespace
 
 (integer_literal) @number
 (float_literal) @number

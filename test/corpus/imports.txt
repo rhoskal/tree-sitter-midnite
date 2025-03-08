@@ -18,51 +18,54 @@ end
 
 (source_file
   (module_declaration
-    (module_path
+    (upper_qid
       (upper_identifier))
-    (export_list
+    (exposing_list
       (expose_all))
     (statement
       (include_statement
-        (module_path
+        (upper_qid
           (upper_identifier)
           (upper_identifier))))
     (statement
       (open_statement
-        (module_path
+        (upper_qid
           (upper_identifier))))
     (statement
       (open_statement
-        (module_path
+        (upper_qid
           (upper_identifier))
         (upper_identifier)))
     (statement
       (open_statement
-        (module_path
+        (upper_qid
           (upper_identifier)
           (upper_identifier))
-        (import_item
-          (lower_identifier))
-        (import_item
-          (lower_identifier))
-        (import_item
-          (upper_identifier))
-        (import_item
-          (upper_identifier)
-          (expose_all))))
+        (import_list
+          (import_item
+            (lower_identifier))
+          (import_item
+            (lower_identifier))
+          (import_item
+            (upper_identifier))
+          (import_item
+            (upper_identifier)
+            (expose_all)))))
     (statement
       (open_statement
-        (module_path
+        (upper_qid
           (upper_identifier)
           (upper_identifier))
-        (import_item
-          (lower_identifier)
-          (lower_identifier))
-        (import_item
-          (lower_identifier))))
+        (import_list
+          (import_item
+            (lower_identifier)
+            (lower_identifier))
+          (import_item
+            (lower_identifier)))))
     (statement
       (open_statement
-        (module_path
+        (upper_qid
           (upper_identifier)
           (upper_identifier))
-        (lower_identifier)))))
+        (hiding_list
+          (lower_identifier))))))

@@ -53,7 +53,7 @@
 (tuple_expression) @align
 (list_expression) @align
 (record_type) @align
-(export_list) @align
+(exposing_list) @align
 (type_parameters) @align
 
 ;; Doc comments
