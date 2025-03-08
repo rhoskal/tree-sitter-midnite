@@ -67,6 +67,29 @@
   "then" @keyword
   "else" @keyword)
 
+(match_expression
+  "match" @keyword
+  "on" @keyword)
+
+(match_case
+  "|" @punctuation.delimiter
+  "=>" @operator)
+
+(wildcard_pattern) @variable.builtin
+
+(constructor_pattern
+  (upper_identifier) @constructor)
+
+(tuple_pattern
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
+(cons_pattern
+  "::" @operator)
+
+(when_clause
+  "when" @keyword)
+
 "(" @punctuation.bracket
 ")" @punctuation.bracket
 "{" @punctuation.bracket

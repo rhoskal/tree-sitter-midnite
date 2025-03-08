@@ -181,6 +181,7 @@ module.exports = grammar({
 
     _expression: ($) =>
       choice(
+        $.match_expression,
         $.unary_expression,
         $.binary_expression,
         $.function_call,
@@ -312,6 +313,47 @@ module.exports = grammar({
     upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,
 
     lower_identifier: (_) => /[a-z][a-zA-Z0-9_?]*/,
+
+    // Section - Pattern Matching
+
+    match_expression: ($) =>
+      prec.right(1, seq("match", $._expression, "on", repeat1($.match_case))),
+
+    match_case: ($) =>
+      seq("|", $.pattern, optional($.when_clause), "=>", $._expression),
+
+    pattern: ($) =>
+      choice(
+        $.wildcard_pattern,
+        $.literal_pattern,
+        $.variable_pattern,
+        $.constructor_pattern,
+        $.tuple_pattern,
+        $.cons_pattern,
+      ),
+
+    wildcard_pattern: (_) => "_",
+
+    literal_pattern: ($) => $._literal,
+
+    variable_pattern: ($) => $.lower_identifier,
+
+    constructor_pattern: ($) =>
+      seq(
+        $.upper_identifier,
+        optional(
+          seq("(", optional(seq($.pattern, repeat(seq(",", $.pattern)))), ")"),
+        ),
+      ),
+
+    tuple_pattern: ($) =>
+      seq("(", $.pattern, repeat1(seq(",", $.pattern)), ")"),
+
+    cons_pattern: ($) => prec.left(9, seq($.pattern, "::", $.pattern)),
+
+    when_clause: ($) => seq("when", $._expression),
+
+    // Section - Literals
 
     _literal: ($) =>
       choice(
