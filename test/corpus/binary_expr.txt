@@ -439,7 +439,7 @@ end
     (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)

@@ -9,7 +9,7 @@
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
 
-(expose_all) @operator
+(expose_everything) @operator
 
 (exposed_item
   (lower_identifier) @function)
@@ -56,7 +56,7 @@
 
 (import_item
   (upper_identifier) @type
-  (expose_all) @operator)
+  (expose_everything) @operator)
 
 (hiding_list
   "(" @punctuation.bracket
@@ -88,7 +88,7 @@
   "{" @punctuation.bracket
   "}" @punctuation.bracket)
 
-(record_pair
+(record_field
   (lower_identifier) @property
   ":" @operator)
 
@@ -154,9 +154,9 @@
   "|" @punctuation.delimiter
   "=>" @operator)
 
-(wildcard_pattern) @variable.builtin
+(ignore_pattern) @variable.builtin
 
-(literal_pattern) @constant
+(constant_pattern) @constant
 
 (variable_pattern) @variable
 
@@ -170,7 +170,7 @@
 (cons_pattern
   "::" @operator)
 
-(when_clause
+(guard_condition
   "when" @keyword)
 
 ;; Section - Identifiers and Literals

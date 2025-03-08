@@ -16,7 +16,7 @@
 ;; Pattern matching
 
 (match_case) @indent
-(when_clause) @indent
+(guard_condition) @indent
 
 ;; Function bodies indent after =>
 

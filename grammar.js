@@ -26,14 +26,14 @@ module.exports = grammar({
       ),
 
     exposing_list: ($) =>
-      choice($.expose_all, seq("(", sepBy1(",", $.exposed_item), ")")),
+      choice($.expose_everything, seq("(", sepBy1(",", $.exposed_item), ")")),
 
-    expose_all: (_) => "(..)",
+    expose_everything: (_) => "(..)",
 
     exposed_item: ($) =>
       seq(
         choice($.lower_identifier, $.upper_identifier),
-        optional($.expose_all),
+        optional($.expose_everything),
       ),
 
     statement: ($) =>
@@ -78,7 +78,7 @@ module.exports = grammar({
         field("type", $.upper_identifier),
         seq(
           field("type", $.upper_identifier),
-          field("constructors", optional($.expose_all)),
+          field("constructors", optional($.expose_everything)),
         ),
       ),
 
@@ -142,9 +142,9 @@ module.exports = grammar({
         seq($.type_expression, "::", $.type_expression),
       ),
 
-    record_type: ($) => seq("{", sepBy1(",", $.record_pair), "}"),
+    record_type: ($) => seq("{", sepBy1(",", $.record_field), "}"),
 
-    record_pair: ($) => seq($.lower_identifier, ":", $.type_expression),
+    record_field: ($) => seq($.lower_identifier, ":", $.type_expression),
 
     tuple_type: ($) => seq("(", sepBy1(",", $.type_expression), ")"),
 
@@ -341,24 +341,24 @@ module.exports = grammar({
       seq(
         "|",
         field("pattern", $.pattern),
-        optional(field("condition", $.when_clause)),
+        optional(field("condition", $.guard_condition)),
         "=>",
         field("body", $._expression),
       ),
 
     pattern: ($) =>
       choice(
-        $.wildcard_pattern,
-        $.literal_pattern,
+        $.ignore_pattern,
+        $.constant_pattern,
         $.variable_pattern,
         $.constructor_pattern,
         $.tuple_pattern,
         $.cons_pattern,
       ),
 
-    wildcard_pattern: (_) => "_",
+    ignore_pattern: (_) => "_",
 
-    literal_pattern: ($) => $._literal,
+    constant_pattern: ($) => $._literal,
 
     variable_pattern: ($) => $.lower_identifier,
 
@@ -374,7 +374,7 @@ module.exports = grammar({
 
     cons_pattern: ($) => prec.left(9, seq($.pattern, "::", $.pattern)),
 
-    when_clause: ($) => seq("when", $._expression),
+    guard_condition: ($) => seq("when", $._expression),
 
     // Section - Identifiers
 
@@ -430,11 +430,11 @@ module.exports = grammar({
       seq(
         '"',
         // String content excluding unescaped quotes and newlines
-        repeat(choice($._escape_sequence, /[^"\\\n]/)),
+        repeat(choice($._character_escape, /[^"\\\n]/)),
         '"',
       ),
 
-    _escape_sequence: (_) =>
+    _character_escape: (_) =>
       token.immediate(
         seq(
           "\\",
