@@ -110,24 +110,20 @@
       "value": "(..)"
     },
     "exposed_item": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "lower_identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "exposed_type"
-        }
-      ]
-    },
-    "exposed_type": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "upper_identifier"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "lower_identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "upper_identifier"
+            }
+          ]
         },
         {
           "type": "CHOICE",

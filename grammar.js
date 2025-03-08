@@ -36,9 +36,11 @@ module.exports = grammar({
 
     expose_all: (_) => "(..)",
 
-    exposed_item: ($) => choice($.lower_identifier, $.exposed_type),
-
-    exposed_type: ($) => seq($.upper_identifier, optional($.expose_all)),
+    exposed_item: ($) =>
+      seq(
+        choice($.lower_identifier, $.upper_identifier),
+        optional($.expose_all),
+      ),
 
     statement: ($) =>
       choice(
