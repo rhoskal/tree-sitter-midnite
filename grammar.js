@@ -103,7 +103,7 @@ module.exports = grammar({
         $.upper_identifier,
         optional($.type_parameters),
         "=",
-        $.type_variants,
+        choice($.type_variants, $.record_type),
       ),
 
     type_variants: ($) =>

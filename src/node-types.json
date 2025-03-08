@@ -1260,6 +1260,10 @@
       "required": true,
       "types": [
         {
+          "type": "record_type",
+          "named": true
+        },
+        {
           "type": "type_parameters",
           "named": true
         },

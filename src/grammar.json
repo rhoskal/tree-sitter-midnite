@@ -544,8 +544,17 @@
           "value": "="
         },
         {
-          "type": "SYMBOL",
-          "name": "type_variants"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_variants"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "record_type"
+            }
+          ]
         }
       ]
     },
