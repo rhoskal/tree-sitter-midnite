@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "if_expression",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -155,6 +159,10 @@
             "named": false
           },
           {
+            "type": "|>",
+            "named": false
+          },
+          {
             "type": "||",
             "named": false
           }
@@ -183,6 +191,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "if_expression",
           "named": true
         },
         {
@@ -338,6 +350,10 @@
           "named": true
         },
         {
+          "type": "if_expression",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -401,6 +417,10 @@
           "named": true
         },
         {
+          "type": "if_expression",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -422,6 +442,73 @@
         },
         {
           "type": "return_type",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "upper_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_function",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "if_expression",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "list_expression",
+          "named": true
+        },
+        {
+          "type": "lower_identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
           "named": true
         },
         {
@@ -494,6 +581,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "if_expression",
           "named": true
         },
         {
@@ -747,6 +838,10 @@
           "named": true
         },
         {
+          "type": "if_expression",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -776,6 +871,21 @@
         },
         {
           "type": "upper_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "type_expression",
           "named": true
         }
       ]
@@ -856,6 +966,10 @@
         },
         {
           "type": "record_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
           "named": true
         },
         {
@@ -967,6 +1081,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "if_expression",
           "named": true
         },
         {
@@ -1145,6 +1263,10 @@
     "named": true
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
     "type": "end",
     "named": false
   },
@@ -1173,6 +1295,10 @@
     "named": false
   },
   {
+    "type": "if",
+    "named": false
+  },
+  {
     "type": "include",
     "named": false
   },
@@ -1189,6 +1315,10 @@
     "named": false
   },
   {
+    "type": "then",
+    "named": false
+  },
+  {
     "type": "type",
     "named": false
   },
@@ -1202,6 +1332,10 @@
   },
   {
     "type": "|",
+    "named": false
+  },
+  {
+    "type": "|>",
     "named": false
   },
   {

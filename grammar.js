@@ -78,6 +78,7 @@ module.exports = grammar({
           ")",
         ),
         $.record_type,
+        $.tuple_type,
       ),
 
     type_declaration: ($) =>
@@ -120,6 +121,9 @@ module.exports = grammar({
         optional(seq($.record_field, repeat(seq(",", $.record_field)))),
         "}",
       ),
+
+    tuple_type: ($) =>
+      seq("(", $.type_expression, repeat1(seq(",", $.type_expression)), ")"),
 
     record_field: ($) => seq($.lower_identifier, ":", $.type_expression),
 
@@ -180,9 +184,10 @@ module.exports = grammar({
         $.unary_expression,
         $.binary_expression,
         $.function_call,
+        $.anonymous_function,
+        $.if_expression,
         $.tuple_expression,
         $.list_expression,
-        $.anonymous_function,
         $.lower_identifier,
         $.qualified_identifier,
         $.upper_identifier,
@@ -267,17 +272,24 @@ module.exports = grammar({
           3,
           seq($._expression, field("operator", "||"), $._expression),
         ),
+        prec.left(
+          1,
+          seq($._expression, field("operator", "|>"), $._expression),
+        ),
       ),
 
     qualified_identifier: ($) =>
       seq($.upper_identifier, ".", $.lower_identifier),
 
     function_call: ($) =>
-      seq(
-        choice($.lower_identifier, $.qualified_identifier),
-        "(",
-        optional(seq($._expression, repeat(seq(",", $._expression)))),
-        ")",
+      prec(
+        2,
+        seq(
+          choice($.lower_identifier, $.qualified_identifier),
+          "(",
+          optional(seq($._expression, repeat(seq(",", $._expression)))),
+          ")",
+        ),
       ),
 
     tuple_expression: ($) =>
@@ -293,6 +305,9 @@ module.exports = grammar({
         optional(seq($._expression, repeat(seq(",", $._expression)))),
         "]",
       ),
+
+    if_expression: ($) =>
+      seq("if", $._expression, "then", $._expression, "else", $._expression),
 
     upper_identifier: (_) => /[A-Z][a-zA-Z0-9]*/,
 
