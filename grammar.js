@@ -164,6 +164,17 @@ module.exports = grammar({
 
     return_type: ($) => seq("->", $.type_expression),
 
+    anonymous_function: ($) =>
+      seq(
+        "fn",
+        "(",
+        optional($.parameter_list),
+        ")",
+        optional($.return_type),
+        "=>",
+        $._expression,
+      ),
+
     _expression: ($) =>
       choice(
         $.unary_expression,
@@ -171,6 +182,7 @@ module.exports = grammar({
         $.function_call,
         $.tuple_expression,
         $.list_expression,
+        $.anonymous_function,
         $.lower_identifier,
         $.qualified_identifier,
         $.upper_identifier,
