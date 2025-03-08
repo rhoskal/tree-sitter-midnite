@@ -28,4 +28,4 @@ jobs:
         run: nix develop --command tree-sitter build
 
       - name: Unit Tests
-        run: nix develop --command tree-sitter -r test
+        run: nix develop --command tree-sitter test -r
