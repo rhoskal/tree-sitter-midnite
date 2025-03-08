@@ -48,4 +48,4 @@ format: ## Format typescript files
 
 .PHONY: test
 test: ## Run tree-sitter test
-	tree-sitter test
+	tree-sitter test -r
