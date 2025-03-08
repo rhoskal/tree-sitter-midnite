@@ -422,6 +422,8 @@ module.exports = grammar({
         ),
       ),
 
+    // Section - Comments
+
     doc_comment: ($) => seq("##", /[^\n]*/),
 
     line_comment: ($) => seq("#", /[^\n]*/),
