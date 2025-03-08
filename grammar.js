@@ -163,9 +163,11 @@ module.exports = grammar({
       choice(
         $.unary_expression,
         $.binary_expression,
+        $.function_call,
         $.tuple_expression,
         $.list_expression,
         $.lower_identifier,
+        $.qualified_identifier,
         $.upper_identifier,
         $._literal,
       ),
@@ -248,6 +250,17 @@ module.exports = grammar({
           3,
           seq($._expression, field("operator", "||"), $._expression),
         ),
+      ),
+
+    qualified_identifier: ($) =>
+      seq($.upper_identifier, ".", $.lower_identifier),
+
+    function_call: ($) =>
+      seq(
+        choice($.lower_identifier, $.qualified_identifier),
+        "(",
+        optional(seq($._expression, repeat(seq(",", $._expression)))),
+        ")",
       ),
 
     tuple_expression: ($) =>

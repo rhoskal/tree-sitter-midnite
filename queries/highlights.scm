@@ -37,6 +37,13 @@
 (binary_expression
   operator: _ @operator)
 
+(qualified_identifier
+  (upper_identifier) @namespace
+  "." @punctuation.delimiter)
+
+(function_call
+  (qualified_identifier) @function)
+
 (tuple_expression
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
