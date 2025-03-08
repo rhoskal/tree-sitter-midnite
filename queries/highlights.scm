@@ -22,6 +22,10 @@
 (record_field
   ":" @operator)
 
+(tuple_type
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
 (foreign_function_declaration
   "foreign" @keyword
   "=" @operator)
@@ -57,6 +61,11 @@
 (list_expression
   "[" @punctuation.bracket
   "]" @punctuation.bracket)
+
+(if_expression
+  "if" @keyword
+  "then" @keyword
+  "else" @keyword)
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
