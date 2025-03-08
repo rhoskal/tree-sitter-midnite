@@ -17,10 +17,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (foreign_function_declaration
         (lower_identifier)

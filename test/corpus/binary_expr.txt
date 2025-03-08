@@ -36,10 +36,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (line_comment)
     (statement
       (function_declaration
@@ -214,10 +214,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)
@@ -240,10 +240,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)
@@ -271,10 +271,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)
@@ -343,10 +343,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)
@@ -378,10 +378,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)
@@ -404,10 +404,10 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (function_declaration
         (lower_identifier)

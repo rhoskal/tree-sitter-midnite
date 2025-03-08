@@ -18,27 +18,27 @@ end
 
 (source_file
   (module_declaration
-    (upper_qid
+    (qualified_module
       (upper_identifier))
     (exposing_list
-      (expose_all))
+      (expose_everything))
     (statement
       (include_statement
-        (upper_qid
+        (qualified_module
           (upper_identifier)
           (upper_identifier))))
     (statement
       (open_statement
-        (upper_qid
+        (qualified_module
           (upper_identifier))))
     (statement
       (open_statement
-        (upper_qid
+        (qualified_module
           (upper_identifier))
         (upper_identifier)))
     (statement
       (open_statement
-        (upper_qid
+        (qualified_module
           (upper_identifier)
           (upper_identifier))
         (import_list
@@ -50,10 +50,10 @@ end
             (upper_identifier))
           (import_item
             (upper_identifier)
-            (expose_all)))))
+            (expose_everything)))))
     (statement
       (open_statement
-        (upper_qid
+        (qualified_module
           (upper_identifier)
           (upper_identifier))
         (import_list
@@ -64,7 +64,7 @@ end
             (lower_identifier)))))
     (statement
       (open_statement
-        (upper_qid
+        (qualified_module
           (upper_identifier)
           (upper_identifier))
         (hiding_list
