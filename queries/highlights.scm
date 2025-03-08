@@ -36,6 +36,10 @@
 (return_type
   "->" @operator)
 
+(anonymous_function
+  "fn" @keyword
+  "=>" @operator)
+
 (binary_expression
   operator: _ @operator)
 
