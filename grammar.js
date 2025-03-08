@@ -307,12 +307,7 @@ module.exports = grammar({
         seq(
           field("function", choice($.lower_identifier, $.qualified_function)),
           "(",
-          optional(
-            field(
-              "arguments",
-              seq($._expression, repeat(seq(",", $._expression))),
-            ),
-          ),
+          optional(field("arguments", sepBy1(",", $._expression))),
           ")",
         ),
       ),
