@@ -28,6 +28,10 @@
           "named": true
         },
         {
+          "type": "group_expression",
+          "named": true
+        },
+        {
           "type": "if_expression",
           "named": true
         },
@@ -195,6 +199,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "group_expression",
           "named": true
         },
         {
@@ -377,6 +385,10 @@
           "named": true
         },
         {
+          "type": "group_expression",
+          "named": true
+        },
+        {
           "type": "if_expression",
           "named": true
         },
@@ -448,6 +460,10 @@
           "named": true
         },
         {
+          "type": "group_expression",
+          "named": true
+        },
+        {
           "type": "if_expression",
           "named": true
         },
@@ -499,6 +515,81 @@
     }
   },
   {
+    "type": "group_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "anonymous_function",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "char_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "group_expression",
+          "named": true
+        },
+        {
+          "type": "if_expression",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "list_expression",
+          "named": true
+        },
+        {
+          "type": "lower_identifier",
+          "named": true
+        },
+        {
+          "type": "match_expression",
+          "named": true
+        },
+        {
+          "type": "qualified_identifier",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "tuple_expression",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "upper_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_expression",
     "named": true,
     "fields": {},
@@ -524,6 +615,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "group_expression",
           "named": true
         },
         {
@@ -646,6 +741,10 @@
           "named": true
         },
         {
+          "type": "group_expression",
+          "named": true
+        },
+        {
           "type": "if_expression",
           "named": true
         },
@@ -744,6 +843,10 @@
           "named": true
         },
         {
+          "type": "group_expression",
+          "named": true
+        },
+        {
           "type": "if_expression",
           "named": true
         },
@@ -820,6 +923,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "group_expression",
           "named": true
         },
         {
@@ -1118,7 +1225,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "anonymous_function",
@@ -1138,6 +1245,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "group_expression",
           "named": true
         },
         {
@@ -1410,6 +1521,10 @@
           "named": true
         },
         {
+          "type": "group_expression",
+          "named": true
+        },
+        {
           "type": "if_expression",
           "named": true
         },
@@ -1493,6 +1608,10 @@
         },
         {
           "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "group_expression",
           "named": true
         },
         {

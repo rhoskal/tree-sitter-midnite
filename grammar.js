@@ -191,6 +191,7 @@ module.exports = grammar({
         $.anonymous_function,
         $.if_expression,
         $.tuple_expression,
+        $.group_expression,
         $.list_expression,
         $.lower_identifier,
         $.qualified_identifier,
@@ -296,12 +297,9 @@ module.exports = grammar({
         ),
       ),
 
-    tuple_expression: ($) =>
-      seq(
-        "(",
-        optional(seq($._expression, repeat(seq(",", $._expression)))),
-        ")",
-      ),
+    group_expression: ($) => seq("(", $._expression, ")"),
+
+    tuple_expression: ($) => seq("(", $._expression, ",", $._expression, ")"),
 
     list_expression: ($) =>
       seq(
@@ -345,8 +343,7 @@ module.exports = grammar({
         ),
       ),
 
-    tuple_pattern: ($) =>
-      seq("(", $.pattern, repeat1(seq(",", $.pattern)), ")"),
+    tuple_pattern: ($) => seq("(", $.pattern, ",", $.pattern, ")"),
 
     cons_pattern: ($) => prec.left(9, seq($.pattern, "::", $.pattern)),
 
@@ -401,7 +398,8 @@ module.exports = grammar({
     string_literal: ($) =>
       seq(
         '"',
-        repeat(choice($._escape_sequence, /[^"\\\n]/)), // String content excluding unescaped quotes and newlines
+        // String content excluding unescaped quotes and newlines
+        repeat(choice($._escape_sequence, /[^"\\\n]/)),
         '"',
       ),
 
@@ -411,7 +409,8 @@ module.exports = grammar({
           "\\",
           choice(
             /[nrt\\'"0]/,
-            /u\{[0-9a-fA-F]{1,6}\}/, // Unicode \u{XXXXXX} (up to 6 hex digits)
+            // Unicode \u{XXXXXX} (up to 6 hex digits)
+            /u\{[0-9a-fA-F]{1,6}\}/,
           ),
         ),
       ),
@@ -422,7 +421,8 @@ module.exports = grammar({
           "'",
           optional(
             choice(
-              seq("\\", choice(/[^nrt]/, /u\{[0-9a-fA-F]{1,6}\}/)), // Unicode \u{XXXXXX} (up to 6 hex digits)
+              // Unicode \u{XXXXXX} (up to 6 hex digits)
+              seq("\\", choice(/[^nrt]/, /u\{[0-9a-fA-F]{1,6}\}/)),
               /[^\\']/,
             ),
           ),
