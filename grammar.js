@@ -186,11 +186,11 @@ module.exports = grammar({
       seq(
         "fn",
         "(",
-        optional($.parameter_list),
+        optional(field("parameters", $.parameter_list)),
         ")",
-        optional($.return_type),
+        optional(field("return_type", $.return_type)),
         "=>",
-        $._expression,
+        field("body", $._expression),
       ),
 
     _expression: ($) =>
@@ -322,7 +322,14 @@ module.exports = grammar({
       ),
 
     if_expression: ($) =>
-      seq("if", $._expression, "then", $._expression, "else", $._expression),
+      seq(
+        "if",
+        field("condition", $._expression),
+        "then",
+        field("then_branch", $._expression),
+        "else",
+        field("else_branch", $._expression),
+      ),
 
     // Section - Pattern Matching
 
@@ -370,9 +377,14 @@ module.exports = grammar({
         ),
       ),
 
-    tuple_pattern: ($) => seq("(", $.pattern, ",", $.pattern, ")"),
+    tuple_pattern: ($) =>
+      seq("(", field("first", $.pattern), ",", field("second", $.pattern), ")"),
 
-    cons_pattern: ($) => prec.left(9, seq($.pattern, "::", $.pattern)),
+    cons_pattern: ($) =>
+      prec.left(
+        9,
+        seq(field("head", $.pattern), "::", field("tail", $.pattern)),
+      ),
 
     guard_condition: ($) => seq("when", $._expression),
 
