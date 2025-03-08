@@ -1,67 +1,85 @@
-(line_comment) @comment
-(doc_comment) @comment.doc
+(module_declaration
+  "module" @keyword
+  "exposing" @keyword
+  "end" @keyword)
 
-(identifier) @variable
-(type_annotation) @type
-(boolean) @constant.builtin
-(function_definition name: (identifier) @function)
-(module_declaration name: (identifier) @module)
-(match_expression) @conditional
+(include_statement
+  "include" @keyword)
 
-; Delimiter
+(type_alias_declaration
+  "type" @keyword
+  "alias" @keyword
+  "=" @operator)
+
+(type_declaration
+  "type" @keyword
+  "=" @operator)
+
+(type_variant) @constructor
+
+(type_variable) @variable.parameter
+
+(record_field
+  ":" @operator)
+
+(foreign_function_declaration
+  "foreign" @keyword
+  "=" @operator)
+
+(function_declaration
+  "let" @keyword
+  "=" @operator)
+
+(type_annotation
+  ":" @operator)
+
+(return_type
+  "->" @operator)
+
+(binary_expression
+  operator: _ @operator)
+
+(qualified_identifier
+  (upper_identifier) @namespace
+  "." @punctuation.delimiter)
+
+(function_call
+  (qualified_identifier) @function)
+
+(tuple_expression
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
+
+(list_expression
+  "[" @punctuation.bracket
+  "]" @punctuation.bracket)
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
 "{" @punctuation.bracket
 "}" @punctuation.bracket
-
-":" @punctuation.delimiter
-"." @punctuation.delimiter
+"[" @punctuation.bracket
+"]" @punctuation.bracket
 "," @punctuation.delimiter
+"." @punctuation.delimiter
+"|" @punctuation.delimiter
 
-; Keyword
+"_" @variable.builtin
 
-"alias" @keyword
-"as" @keyword
-"else" @keyword
-"end" @keyword
-"exposing" @keyword
-"fn" @keyword
-"foreign" @keyword
-"hiding" @keyword
-"include" @keyword
-"infixl" @keyword
-"infixn" @keyword
-"infixr" @keyword
-"let" @keyword
-"match" @keyword
-"module" @keyword
-"on" @keyword
-"open" @keyword
-"then" @keyword
-"type" @keyword
-"using" @keyword
-"when" @keyword
+; Literals
 
-; Operator
+(integer_literal) @number
+(float_literal) @number
 
-"+." @operator
-"-." @operator
-"/." @operator
-"*." @operator
-"+" @operator
-"-" @operator
-"/" @operator
-"*" @operator
-"::" @operator
-"<>" @operator
-"==" @operator
-"/=" @operator
-"<" @operator
-"<=" @operator
-">" @operator
-">=" @operator
-"&&" @operator
-"||" @operator
+(char_literal) @string
+(string_literal) @string
+
+; Identifiers
+
+(upper_identifier) @type
+(lower_identifier) @variable
+
+; Comments
+
+(doc_comment) @comment.doc
+(line_comment) @comment
