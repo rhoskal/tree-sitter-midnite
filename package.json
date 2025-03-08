@@ -25,32 +25,17 @@
     "src/**",
     "*.wasm"
   ],
-  "dependencies": {
-    "node-addon-api": "^8.2.1",
-    "node-gyp-build": "^4.8.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
     "lint-staged": "^15.4.3",
     "prebuildify": "^6.0.1",
-    "prettier": "^3.5.3",
-    "tree-sitter-cli": "^0.25.3"
-  },
-  "peerDependencies": {
-    "tree-sitter": "^0.21.1"
-  },
-  "peerDependenciesMeta": {
-    "tree-sitter": {
-      "optional": true
-    }
+    "prettier": "^3.5.3"
   },
   "scripts": {
     "format": "prettier --write '**/*.js'",
-    "install": "node-gyp-build",
-    "prepare": "is-ci || husky",
-    "prestart": "tree-sitter build --wasm",
-    "start": "tree-sitter playground"
+    "prepare": "is-ci || husky"
   },
   "lint-staged": {
     "**/*.js": [

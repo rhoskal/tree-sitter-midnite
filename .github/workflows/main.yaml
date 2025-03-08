@@ -24,9 +24,6 @@ jobs:
           extra_nix_config: |
             extra-platforms = aarch64-linux
 
-      - name: Dependencies
-        run: nix develop --command pnpm install
-
       - name: Build
         run: nix develop --command tree-sitter build
 
