@@ -343,10 +343,6 @@
             "named": false
           },
           {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
             "type": "char_literal",
             "named": true
           },
@@ -363,27 +359,11 @@
             "named": true
           },
           {
-            "type": "if_expression",
-            "named": true
-          },
-          {
             "type": "integer_literal",
             "named": true
           },
           {
-            "type": "lambda_function",
-            "named": true
-          },
-          {
-            "type": "list_expression",
-            "named": true
-          },
-          {
             "type": "lower_identifier",
-            "named": true
-          },
-          {
-            "type": "match_expression",
             "named": true
           },
           {
@@ -392,14 +372,6 @@
           },
           {
             "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "tuple_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
             "named": true
           },
           {

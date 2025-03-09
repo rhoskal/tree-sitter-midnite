@@ -1,5 +1,5 @@
 ================================================================
-Function Declarations
+Function Declaration
 ================================================================
 
 module Main exposing (..)
@@ -9,8 +9,8 @@ module Main exposing (..)
     let double(x : Int) -> Int =
         x * 2
 
-    let apply(f, x) =
-        f(x)
+    let id(x) =
+        x
 end
 
 ----------------------------------------------------------------
@@ -51,8 +51,53 @@ end
       (function_declaration
         (lower_identifier)
         (parameter_list
+          (lower_identifier))
+        (lower_identifier)))))
+
+================================================================
+Function Call
+================================================================
+
+module Main exposing (..)
+    let apply(f, x) =
+        f(x)
+
+    let c() =
+        add(1, 2)
+
+    let h() =
+        f(g(5))
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
           (lower_identifier)
           (lower_identifier))
         (function_call
           (lower_identifier)
-          (lower_identifier))))))
+          (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (function_call
+          (lower_identifier)
+          (integer_literal)
+          (integer_literal))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (function_call
+          (lower_identifier)
+          (function_call
+            (lower_identifier)
+            (integer_literal)))))))

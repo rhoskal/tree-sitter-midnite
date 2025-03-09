@@ -303,13 +303,23 @@ module.exports = grammar({
 
     function_call: ($) =>
       prec(
-        2,
+        13,
         seq(
           field("function", choice($.lower_identifier, $.qualified_function)),
           "(",
-          optional(field("arguments", sepBy1(",", $._expression))),
+          optional(field("arguments", sepBy1(",", $._simple_expression))),
           ")",
         ),
+      ),
+
+    _simple_expression: ($) =>
+      choice(
+        $._literal,
+        $.lower_identifier,
+        $.upper_identifier,
+        $.qualified_function,
+        $.group_expression,
+        $.function_call,
       ),
 
     group_expression: ($) => seq("(", $._expression, ")"),
