@@ -76,7 +76,7 @@ end
         (return_type
           (type_expression
             (upper_identifier)))
-        (function_call
+        (call_expression
           (lower_identifier))))
     (statement
       (function_declaration
@@ -97,7 +97,7 @@ end
         (return_type
           (type_expression
             (upper_identifier)))
-        (function_call
+        (call_expression
           (upper_identifier)
           (record_expression
             (record_field_shorthand
@@ -114,25 +114,25 @@ end
           (lower_identifier))
         (binary_expression
           (lower_identifier)
-          (function_call
+          (call_expression
             (lower_identifier)
             (upper_identifier)
-            (lambda_function
+            (lambda_expression
               (parameter_list
                 (lower_identifier)
                 (lower_identifier))
               (if_expression
-                (function_call
+                (call_expression
                   (lower_identifier)
                   (lower_identifier))
-                (function_call
+                (call_expression
                   (lower_identifier)
                   (lower_identifier)
                   (lower_identifier))
                 (lower_identifier)))))))))
 
 ================================================================
-Function Call
+Call Expression
 ================================================================
 
 module Main exposing (..)
@@ -160,22 +160,22 @@ end
         (parameter_list
           (lower_identifier)
           (lower_identifier))
-        (function_call
+        (call_expression
           (lower_identifier)
           (lower_identifier))))
     (statement
       (function_declaration
         (lower_identifier)
-        (function_call
+        (call_expression
           (lower_identifier)
           (integer_literal)
           (integer_literal))))
     (statement
       (function_declaration
         (lower_identifier)
-        (function_call
+        (call_expression
           (lower_identifier)
-          (function_call
+          (call_expression
             (lower_identifier)
             (integer_literal)))))))
 
@@ -205,7 +205,7 @@ end
     (statement
       (function_declaration
         (lower_identifier)
-        (lambda_function
+        (lambda_expression
           (parameter_list
             (lower_identifier))
           (binary_expression
@@ -217,15 +217,15 @@ end
         (parameter_list
           (lower_identifier)
           (lower_identifier))
-        (function_call
+        (call_expression
           (lower_identifier)
           (lower_identifier))))
     (statement
       (function_declaration
         (lower_identifier)
-        (function_call
+        (call_expression
           (lower_identifier)
-          (lambda_function
+          (lambda_expression
             (parameter_list
               (lower_identifier))
             (lower_identifier))

@@ -15,6 +15,8 @@ module.exports = grammar({
   rules: {
     source_file: ($) => $.module_declaration,
 
+    // Section - Module Structure
+
     module_declaration: ($) =>
       seq(
         "module",
@@ -148,6 +150,8 @@ module.exports = grammar({
 
     tuple_type: ($) => seq("(", sepBy1(",", $.type_expression), ")"),
 
+    // Section - Function Declarations
+
     foreign_function_declaration: ($) =>
       seq(
         "foreign",
@@ -182,7 +186,9 @@ module.exports = grammar({
 
     return_type: ($) => seq("->", $.type_expression),
 
-    lambda_function: ($) =>
+    // Section - Expressions
+
+    lambda_expression: ($) =>
       seq(
         "fn",
         "(",
@@ -198,10 +204,10 @@ module.exports = grammar({
         // Higher-level language constructs first
         $.match_expression,
         $.if_expression,
-        $.lambda_function,
+        $.lambda_expression,
 
         // Function calls and operations
-        $.function_call,
+        $.call_expression,
         $.binary_expression,
         $.unary_expression,
 
@@ -213,8 +219,20 @@ module.exports = grammar({
         $.qualified_function,
         $.lower_identifier,
         $.upper_identifier,
-        $.group_expression,
+        $.parenthesized_expression,
         $._literal,
+      ),
+
+    _simple_expression: ($) =>
+      choice(
+        $._literal,
+        $.lower_identifier,
+        $.upper_identifier,
+        $.qualified_function,
+        $.lambda_expression,
+        $.parenthesized_expression,
+        $.call_expression,
+        $.record_expression,
       ),
 
     unary_expression: ($) => choice(seq("-", $._expression)),
@@ -301,7 +319,7 @@ module.exports = grammar({
         ),
       ),
 
-    function_call: ($) =>
+    call_expression: ($) =>
       prec(
         13,
         seq(
@@ -319,19 +337,7 @@ module.exports = grammar({
         ),
       ),
 
-    _simple_expression: ($) =>
-      choice(
-        $._literal,
-        $.lower_identifier,
-        $.upper_identifier,
-        $.qualified_function,
-        $.lambda_function,
-        $.group_expression,
-        $.function_call,
-        $.record_expression,
-      ),
-
-    group_expression: ($) => seq("(", $._expression, ")"),
+    parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
     record_expression: ($) =>
       seq(
@@ -532,6 +538,8 @@ module.exports = grammar({
     line_comment: ($) => seq("#", /[^\n]*/),
   },
 });
+
+// Section - Helpers
 
 /**
  * Creates a rule to match one or more of the rules separated by the separator.

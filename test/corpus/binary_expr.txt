@@ -416,10 +416,10 @@ end
         (binary_expression
           (binary_expression
             (lower_identifier)
-            (function_call
+            (call_expression
               (lower_identifier)
               (integer_literal)))
-          (function_call
+          (call_expression
             (lower_identifier)
             (integer_literal)))))))
 
@@ -454,7 +454,7 @@ end
               (lower_identifier))
             (binary_expression
               (lower_identifier)
-              (group_expression
+              (parenthesized_expression
                 (binary_expression
                   (lower_identifier)
                   (integer_literal)))))
@@ -467,11 +467,11 @@ end
           (lower_identifier)
           (lower_identifier))
         (binary_expression
-          (group_expression
+          (parenthesized_expression
             (binary_expression
               (lower_identifier)
               (lower_identifier)))
-          (group_expression
+          (parenthesized_expression
             (binary_expression
               (lower_identifier)
               (lower_identifier))))))))

@@ -112,11 +112,11 @@
 (return_type
   "->" @operator)
 
-(lambda_function
+(lambda_expression
   "fn" @keyword
   "=>" @operator)
 
-(function_call
+(call_expression
   (qualified_function) @function)
 
 ;; Section - Expressions
@@ -127,7 +127,7 @@
 (binary_expression
   operator: _ @operator)
 
-(group_expression
+(parenthesized_expression
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
 
@@ -154,7 +154,7 @@
   "then" @keyword
   "else" @keyword)
 
-;; Section - Match Expressions
+;; Section - Pattern Matching
 
 (match_expression
   "match" @keyword
@@ -185,7 +185,7 @@
 (guard_condition
   "when" @keyword)
 
-;; Section - Identifiers and Literals
+;; Section - Identifiers
 
 "_" @variable.builtin
 
@@ -197,6 +197,8 @@
   (upper_identifier) @namespace
   "." @punctuation.delimiter
   (lower_identifier) @function)
+
+;; Section - Literals
 
 (integer_literal) @number
 (float_literal) @number

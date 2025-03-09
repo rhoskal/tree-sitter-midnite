@@ -72,7 +72,7 @@ end
                     (lower_identifier)))))
             (binary_expression
               (integer_literal)
-              (function_call
+              (call_expression
                 (lower_identifier)
                 (lower_identifier)))))))
     (statement

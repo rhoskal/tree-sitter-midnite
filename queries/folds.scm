@@ -11,7 +11,7 @@
 
 (function_declaration) @fold
 (foreign_function_declaration) @fold
-(lambda_function) @fold
+(lambda_expression) @fold
 
 ;; Comments
 
@@ -37,4 +37,4 @@
 
 ;; Function calls with arguments
 
-(function_call) @fold
+(call_expression) @fold
