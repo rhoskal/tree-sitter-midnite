@@ -1851,6 +1851,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "lambda_function"
+        },
+        {
+          "type": "SYMBOL",
           "name": "group_expression"
         },
         {

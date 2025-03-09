@@ -318,6 +318,7 @@ module.exports = grammar({
         $.lower_identifier,
         $.upper_identifier,
         $.qualified_function,
+        $.lambda_function,
         $.group_expression,
         $.function_call,
       ),

@@ -363,6 +363,10 @@
             "named": true
           },
           {
+            "type": "lambda_function",
+            "named": true
+          },
+          {
             "type": "lower_identifier",
             "named": true
           },

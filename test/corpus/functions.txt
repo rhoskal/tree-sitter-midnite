@@ -101,3 +101,55 @@ end
           (function_call
             (lower_identifier)
             (integer_literal)))))))
+
+==================
+Lambda Expression
+==================
+
+module Main exposing (..)
+    let f() =
+        fn(x) => x + 1
+
+    let apply(f, x) =
+        f(x)
+
+    let result() =
+        apply(fn(x) => x, 5)
+end
+
+---
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (lambda_function
+          (parameter_list
+            (lower_identifier))
+          (binary_expression
+            (lower_identifier)
+            (integer_literal)))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (function_call
+          (lower_identifier)
+          (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (function_call
+          (lower_identifier)
+          (lambda_function
+            (parameter_list
+              (lower_identifier))
+            (lower_identifier))
+          (integer_literal))))))
