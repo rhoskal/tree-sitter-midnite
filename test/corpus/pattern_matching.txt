@@ -1,0 +1,139 @@
+================================================================
+Match Expression
+================================================================
+
+module Match exposing (..)
+    let zero?(x) =
+        match x on
+        | 0 => True
+        | _ => False
+
+    let length(list) =
+        match list on
+        | Nil => 0
+        | x :: xs => 1 + length(xs)
+
+    let get_sign(n) =
+        match n on
+        | x when x > 0 => "positive"
+        | x when x < 0 => "negative"
+        | _ => "zero"
+
+    let and(x : Bool, y : Bool) -> Bool =
+        match (x, y) on
+        | (True, True) => True
+        | _ => False
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier))
+        (match_expression
+          (lower_identifier)
+          (match_case
+            (pattern
+              (constant_pattern
+                (integer_literal)))
+            (upper_identifier))
+          (match_case
+            (pattern
+              (ignore_pattern))
+            (upper_identifier)))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier))
+        (match_expression
+          (lower_identifier)
+          (match_case
+            (pattern
+              (constructor_pattern
+                (upper_identifier)))
+            (integer_literal))
+          (match_case
+            (pattern
+              (cons_pattern
+                (pattern
+                  (variable_pattern
+                    (lower_identifier)))
+                (pattern
+                  (variable_pattern
+                    (lower_identifier)))))
+            (binary_expression
+              (integer_literal)
+              (function_call
+                (lower_identifier)
+                (lower_identifier)))))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier))
+        (match_expression
+          (lower_identifier)
+          (match_case
+            (pattern
+              (variable_pattern
+                (lower_identifier)))
+            (guard_condition
+              (binary_expression
+                (lower_identifier)
+                (integer_literal)))
+            (string_literal))
+          (match_case
+            (pattern
+              (variable_pattern
+                (lower_identifier)))
+            (guard_condition
+              (binary_expression
+                (lower_identifier)
+                (integer_literal)))
+            (string_literal))
+          (match_case
+            (pattern
+              (ignore_pattern))
+            (string_literal)))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier)))
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (match_expression
+          (tuple_expression
+            (lower_identifier)
+            (lower_identifier))
+          (match_case
+            (pattern
+              (tuple_pattern
+                (pattern
+                  (constructor_pattern
+                    (upper_identifier)))
+                (pattern
+                  (constructor_pattern
+                    (upper_identifier)))))
+            (upper_identifier))
+          (match_case
+            (pattern
+              (ignore_pattern))
+            (upper_identifier)))))))

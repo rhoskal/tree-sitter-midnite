@@ -403,9 +403,15 @@ module.exports = grammar({
 
     constructor_pattern: ($) =>
       seq(
-        $.upper_identifier,
+        field("constructor", $.upper_identifier),
         optional(
-          seq("(", optional(seq($.pattern, repeat(seq(",", $.pattern)))), ")"),
+          seq(
+            "(",
+            optional(
+              field("arguments", seq($.pattern, repeat(seq(",", $.pattern)))),
+            ),
+            ")",
+          ),
         ),
       ),
 
@@ -443,6 +449,7 @@ module.exports = grammar({
 
     integer_literal: (_) =>
       choice(
+        "0",
         /[1-9][0-9_]*/, // decimal
         /0x[0-9a-fA-F_]+/, // hexadecimal
         /0b[01_]+/, // binary

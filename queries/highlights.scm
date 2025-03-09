@@ -171,7 +171,9 @@
 (variable_pattern) @variable
 
 (constructor_pattern
-  (upper_identifier) @constructor)
+  (upper_identifier) @constructor
+  "(" @punctuation.bracket
+  ")" @punctuation.bracket)
 
 (tuple_pattern
   "(" @punctuation.bracket
