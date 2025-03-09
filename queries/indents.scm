@@ -18,7 +18,7 @@
 (match_case) @indent
 (guard_condition) @indent
 
-;; Function bodies indent after =>
+;; Function bodies
 
 (lambda_expression "=>" @indent)
 (match_case "=>" @indent)

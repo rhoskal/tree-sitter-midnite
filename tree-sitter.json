@@ -4,11 +4,11 @@
     {
       "name": "midnite",
       "camelcase": "Midnite",
-      "title": "Midnite",
       "scope": "source.midnite",
-      "file-types": [
-        "mn"
-      ],
+      "path": ".",
+      "file-types": ["mn"],
+      "highlights": ["queries/highlights.scm"],
+      "tags": ["queries/tags.scm"],
       "injection-regex": "^midnite$",
       "class-name": "TreeSitterMidnite"
     }
