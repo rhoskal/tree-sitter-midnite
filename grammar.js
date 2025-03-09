@@ -443,6 +443,7 @@ module.exports = grammar({
 
     integer_literal: (_) =>
       choice(
+        "0",
         /[1-9][0-9_]*/, // decimal
         /0x[0-9a-fA-F_]+/, // hexadecimal
         /0b[01_]+/, // binary
