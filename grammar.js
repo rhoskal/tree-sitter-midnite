@@ -471,37 +471,39 @@ module.exports = grammar({
       ),
 
     string_literal: ($) =>
-      seq(
-        '"',
-        // String content excluding unescaped quotes and newlines
-        repeat(choice($._character_escape, /[^"\\\n]/)),
-        '"',
+      seq('"', repeat(choice($._string_escape, /[^"\\\n]/)), '"'),
+
+    _string_escape: (_) =>
+      token.immediate(
+        seq(
+          "\\",
+          choice(
+            "\\",
+            '"',
+            "n",
+            "t",
+            "r",
+            // Unicode \u{XXXXXX} (up to 6 hex digits)
+            seq("u", /\{[0-9a-fA-F]{1,6}\}/),
+          ),
+        ),
       ),
+
+    char_literal: ($) => seq("'", choice($._character_escape, /[^\\'\n]/), "'"),
 
     _character_escape: (_) =>
       token.immediate(
         seq(
           "\\",
           choice(
-            /[nrt\\'"0]/,
+            "\\",
+            "'",
+            "n",
+            "t",
+            "r",
             // Unicode \u{XXXXXX} (up to 6 hex digits)
-            /u\{[0-9a-fA-F]{1,6}\}/,
+            seq("u", /\{[0-9a-fA-F]{1,6}\}/),
           ),
-        ),
-      ),
-
-    char_literal: (_) =>
-      token(
-        seq(
-          "'",
-          optional(
-            choice(
-              // Unicode \u{XXXXXX} (up to 6 hex digits)
-              seq("\\", choice(/[^nrt]/, /u\{[0-9a-fA-F]{1,6}\}/)),
-              /[^\\']/,
-            ),
-          ),
-          "'",
         ),
       ),
 

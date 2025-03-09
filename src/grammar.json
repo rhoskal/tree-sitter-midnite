@@ -2559,7 +2559,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_character_escape"
+                "name": "_string_escape"
               },
               {
                 "type": "PATTERN",
@@ -2571,6 +2571,82 @@
         {
           "type": "STRING",
           "value": "\""
+        }
+      ]
+    },
+    "_string_escape": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\\"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\\"
+              },
+              {
+                "type": "STRING",
+                "value": "\""
+              },
+              {
+                "type": "STRING",
+                "value": "n"
+              },
+              {
+                "type": "STRING",
+                "value": "t"
+              },
+              {
+                "type": "STRING",
+                "value": "r"
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "u"
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "\\{[0-9a-fA-F]{1,6}\\}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "char_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "'"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_character_escape"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\\\'\\n]"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "'"
         }
       ]
     },
@@ -2587,69 +2663,39 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[nrt\\\\'\"0]"
+                "type": "STRING",
+                "value": "\\"
               },
               {
-                "type": "PATTERN",
-                "value": "u\\{[0-9a-fA-F]{1,6}\\}"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "char_literal": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "'"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
+                "type": "STRING",
+                "value": "'"
+              },
               {
-                "type": "CHOICE",
+                "type": "STRING",
+                "value": "n"
+              },
+              {
+                "type": "STRING",
+                "value": "t"
+              },
+              {
+                "type": "STRING",
+                "value": "r"
+              },
+              {
+                "type": "SEQ",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "\\"
-                      },
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "PATTERN",
-                            "value": "[^nrt]"
-                          },
-                          {
-                            "type": "PATTERN",
-                            "value": "u\\{[0-9a-fA-F]{1,6}\\}"
-                          }
-                        ]
-                      }
-                    ]
+                    "type": "STRING",
+                    "value": "u"
                   },
                   {
                     "type": "PATTERN",
-                    "value": "[^\\\\']"
+                    "value": "\\{[0-9a-fA-F]{1,6}\\}"
                   }
                 ]
-              },
-              {
-                "type": "BLANK"
               }
             ]
-          },
-          {
-            "type": "STRING",
-            "value": "'"
           }
         ]
       }

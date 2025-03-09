@@ -166,6 +166,11 @@
     }
   },
   {
+    "type": "char_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "cons_pattern",
     "named": true,
     "fields": {
@@ -2165,6 +2170,10 @@
     "named": false
   },
   {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -2287,10 +2296,6 @@
   {
     "type": "as",
     "named": false
-  },
-  {
-    "type": "char_literal",
-    "named": true
   },
   {
     "type": "else",
