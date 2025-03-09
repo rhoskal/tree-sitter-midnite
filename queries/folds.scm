@@ -11,7 +11,7 @@
 
 (function_declaration) @fold
 (foreign_function_declaration) @fold
-(anonymous_function) @fold
+(lambda_function) @fold
 
 ;; Comments
 
@@ -30,7 +30,7 @@
 
 ;; Lists with multiple items
 
-(export_list) @fold
+(exposing_list) @fold
 (type_parameters) @fold
 (parameter_list) @fold
 (type_variants) @fold

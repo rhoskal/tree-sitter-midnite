@@ -1,0 +1,232 @@
+================================================================
+Function Declaration
+================================================================
+
+module Main exposing (..)
+    foreign sqrt(x : Float) -> Float =
+        "c_sqrt"
+
+    let double(x : Int) -> Int =
+        x * 2
+
+    let id(x) =
+        x
+
+    let pi() -> Float =
+        float_pi()
+
+    let mk_date(month : Month, day : Int, year : Int) -> Date =
+        Date({ month, day, year })
+
+    let keep(list, predicate) =
+        list
+        |> fold_right(
+            Nil,
+            fn(x, xs) =>
+                if predicate(x) then
+                    cons(xs, x)
+                else
+                    xs
+        )
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (foreign_function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (string_literal)))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (binary_expression
+          (lower_identifier)
+          (integer_literal))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier))
+        (lower_identifier)))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (function_call
+          (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier)))
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier)))
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (function_call
+          (upper_identifier)
+          (record_expression
+            (record_field_shorthand
+              (lower_identifier))
+            (record_field_shorthand
+              (lower_identifier))
+            (record_field_shorthand
+              (lower_identifier))))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (binary_expression
+          (lower_identifier)
+          (function_call
+            (lower_identifier)
+            (upper_identifier)
+            (lambda_function
+              (parameter_list
+                (lower_identifier)
+                (lower_identifier))
+              (if_expression
+                (function_call
+                  (lower_identifier)
+                  (lower_identifier))
+                (function_call
+                  (lower_identifier)
+                  (lower_identifier)
+                  (lower_identifier))
+                (lower_identifier)))))))))
+
+================================================================
+Function Call
+================================================================
+
+module Main exposing (..)
+    let apply(f, x) =
+        f(x)
+
+    let c() =
+        add(1, 2)
+
+    let h() =
+        f(g(5))
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (function_call
+          (lower_identifier)
+          (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (function_call
+          (lower_identifier)
+          (integer_literal)
+          (integer_literal))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (function_call
+          (lower_identifier)
+          (function_call
+            (lower_identifier)
+            (integer_literal)))))))
+
+==================
+Lambda Expression
+==================
+
+module Main exposing (..)
+    let f() =
+        fn(x) => x + 1
+
+    let apply(f, x) =
+        f(x)
+
+    let result() =
+        apply(fn(x) => x, 5)
+end
+
+---
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (lambda_function
+          (parameter_list
+            (lower_identifier))
+          (binary_expression
+            (lower_identifier)
+            (integer_literal)))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (function_call
+          (lower_identifier)
+          (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (function_call
+          (lower_identifier)
+          (lambda_function
+            (parameter_list
+              (lower_identifier))
+            (lower_identifier))
+          (integer_literal))))))

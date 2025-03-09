@@ -1,0 +1,241 @@
+================================================================
+Type Alias
+================================================================
+
+module Main exposing (..)
+    type alias Point =
+        { x : Float
+        , y : Float
+        }
+
+    type alias Seconds =
+        Int
+
+    type alias Dict(k, v) =
+        Map(k, v)
+
+    type alias TreeMap(k, v) =
+        Tree(Pair(k, v), Compare(k))
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (type_alias_declaration
+        (upper_identifier)
+        (type_expression
+          (record_type
+            (record_field
+              (lower_identifier)
+              (type_expression
+                (upper_identifier)))
+            (record_field
+              (lower_identifier)
+              (type_expression
+                (upper_identifier)))))))
+    (statement
+      (type_alias_declaration
+        (upper_identifier)
+        (type_expression
+          (upper_identifier))))
+    (statement
+      (type_alias_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier))
+          (type_variable
+            (lower_identifier)))
+        (type_expression
+          (upper_identifier)
+          (type_expression
+            (lower_identifier))
+          (type_expression
+            (lower_identifier)))))
+    (statement
+      (type_alias_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier))
+          (type_variable
+            (lower_identifier)))
+        (type_expression
+          (upper_identifier)
+          (type_expression
+            (upper_identifier)
+            (type_expression
+              (lower_identifier))
+            (type_expression
+              (lower_identifier)))
+          (type_expression
+            (upper_identifier)
+            (type_expression
+              (lower_identifier))))))))
+
+================================================================
+Type Variant
+================================================================
+
+module Main exposing (..)
+    type Boolean = True | False
+
+    type Maybe(a) =
+        | None
+        | Some(a)
+
+    type Tree(a) =
+        | Leaf
+        | Branch(Tree(a), a, Tree(a))
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (type_declaration
+        (upper_identifier)
+        (type_variants
+          (type_variant
+            (upper_identifier))
+          (type_variant
+            (upper_identifier)))))
+    (statement
+      (type_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier)))
+        (type_variants
+          (type_variant
+            (upper_identifier))
+          (type_variant
+            (upper_identifier)
+            (type_expression
+              (lower_identifier))))))
+    (statement
+      (type_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier)))
+        (type_variants
+          (type_variant
+            (upper_identifier))
+          (type_variant
+            (upper_identifier)
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (lower_identifier)))
+            (type_expression
+              (lower_identifier))
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (lower_identifier)))))))))
+
+================================================================
+Record Type
+================================================================
+
+module Main exposing (..)
+    type Point(a) =
+        { x : a
+        , y : a
+        }
+
+    type Dict(k, v) =
+        { keys : List(k)
+        , values : List(v)
+        }
+
+    type Storage(a) =
+        { items : List(Maybe(a))
+        , count : Maybe(Int)
+        , names : List(String)
+        }
+end
+
+----------------------------------------------------------------
+
+(source_file
+  (module_declaration
+    (qualified_module
+      (upper_identifier))
+    (exposing_list
+      (expose_everything))
+    (statement
+      (type_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier)))
+        (record_type
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (lower_identifier)))
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (lower_identifier))))))
+    (statement
+      (type_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier))
+          (type_variable
+            (lower_identifier)))
+        (record_type
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (lower_identifier))))
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (lower_identifier)))))))
+    (statement
+      (type_declaration
+        (upper_identifier)
+        (type_parameters
+          (type_variable
+            (lower_identifier)))
+        (record_type
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (upper_identifier)
+                (type_expression
+                  (lower_identifier)))))
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (upper_identifier))))
+          (record_field
+            (lower_identifier)
+            (type_expression
+              (upper_identifier)
+              (type_expression
+                (upper_identifier)))))))))

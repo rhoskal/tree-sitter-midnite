@@ -16,11 +16,11 @@
 ;; Pattern matching
 
 (match_case) @indent
-(when_clause) @indent
+(guard_condition) @indent
 
 ;; Function bodies indent after =>
 
-(anonymous_function "=>" @indent)
+(lambda_function "=>" @indent)
 (match_case "=>" @indent)
 
 ;; Type definitions
@@ -53,7 +53,7 @@
 (tuple_expression) @align
 (list_expression) @align
 (record_type) @align
-(export_list) @align
+(exposing_list) @align
 (type_parameters) @align
 
 ;; Doc comments
