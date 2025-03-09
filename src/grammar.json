@@ -2405,6 +2405,10 @@
         {
           "type": "SYMBOL",
           "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multiline_string_literal"
         }
       ]
     },
@@ -2696,6 +2700,26 @@
                 ]
               }
             ]
+          }
+        ]
+      }
+    },
+    "multiline_string_literal": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\"\"\""
+          },
+          {
+            "type": "PATTERN",
+            "value": "([^\"]|\"[^\"]|\"\"[^\"])*"
+          },
+          {
+            "type": "STRING",
+            "value": "\"\"\""
           }
         ]
       }

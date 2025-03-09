@@ -438,6 +438,7 @@ module.exports = grammar({
         $.float_literal,
         $.char_literal,
         $.string_literal,
+        $.multiline_string_literal,
       ),
 
     integer_literal: (_) =>
@@ -504,6 +505,16 @@ module.exports = grammar({
             // Unicode \u{XXXXXX} (up to 6 hex digits)
             seq("u", /\{[0-9a-fA-F]{1,6}\}/),
           ),
+        ),
+      ),
+
+    multiline_string_literal: (_) =>
+      token(
+        seq(
+          '"""',
+          // Match anything that isn't three consecutive quotes
+          /([^"]|"[^"]|""[^"])*/,
+          '"""',
         ),
       ),
 

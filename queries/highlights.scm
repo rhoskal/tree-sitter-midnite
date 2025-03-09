@@ -201,6 +201,7 @@
 
 (char_literal) @string
 (string_literal) @string
+(multiline_string_literal) @string
 
 ;; Section - Comments
 
