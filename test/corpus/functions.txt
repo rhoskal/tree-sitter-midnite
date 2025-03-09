@@ -15,6 +15,9 @@ module Main exposing (..)
     let pi() -> Float =
         float_pi()
 
+    let mk_date(month : Month, day : Int, year : Int) -> Date =
+        Date({ month, day, year })
+
     let keep(list, predicate) =
         list
         |> fold_right(
@@ -75,6 +78,34 @@ end
             (upper_identifier)))
         (function_call
           (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier)))
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier)))
+          (lower_identifier)
+          (type_annotation
+            (type_expression
+              (upper_identifier))))
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (function_call
+          (upper_identifier)
+          (record_expression
+            (record_field_shorthand
+              (lower_identifier))
+            (record_field_shorthand
+              (lower_identifier))
+            (record_field_shorthand
+              (lower_identifier))))))
     (statement
       (function_declaration
         (lower_identifier)

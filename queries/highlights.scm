@@ -131,6 +131,16 @@
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
 
+(record_expression
+  "{" @punctuation.bracket
+  "}" @punctuation.bracket)
+
+(record_field_value
+  (lower_identifier) @property
+  "=" @operator)
+
+(record_field_shorthand) @property
+
 (tuple_expression
   "(" @punctuation.bracket
   ")" @punctuation.bracket)

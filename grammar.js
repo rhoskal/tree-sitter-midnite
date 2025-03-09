@@ -305,7 +305,14 @@ module.exports = grammar({
       prec(
         13,
         seq(
-          field("function", choice($.lower_identifier, $.qualified_function)),
+          field(
+            "function",
+            choice(
+              $.lower_identifier,
+              $.qualified_function,
+              $.upper_identifier,
+            ),
+          ),
           "(",
           optional(field("arguments", sepBy1(",", $._simple_expression))),
           ")",
@@ -321,9 +328,21 @@ module.exports = grammar({
         $.lambda_function,
         $.group_expression,
         $.function_call,
+        $.record_expression,
       ),
 
     group_expression: ($) => seq("(", $._expression, ")"),
+
+    record_expression: ($) =>
+      seq(
+        "{",
+        sepBy1(",", choice($.record_field_value, $.record_field_shorthand)),
+        "}",
+      ),
+
+    record_field_value: ($) => seq($.lower_identifier, "=", $._expression),
+
+    record_field_shorthand: ($) => $.lower_identifier,
 
     tuple_expression: ($) => seq("(", $._expression, ",", $._expression, ")"),
 
