@@ -1093,7 +1093,7 @@
         }
       ]
     },
-    "lambda_function": {
+    "lambda_expression": {
       "type": "SEQ",
       "members": [
         {
@@ -1167,11 +1167,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "lambda_function"
+          "name": "lambda_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "function_call"
+          "name": "call_expression"
         },
         {
           "type": "SYMBOL",
@@ -1203,11 +1203,48 @@
         },
         {
           "type": "SYMBOL",
-          "name": "group_expression"
+          "name": "parenthesized_expression"
         },
         {
           "type": "SYMBOL",
           "name": "_literal"
+        }
+      ]
+    },
+    "_simple_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "lower_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "upper_identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "qualified_function"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "lambda_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "call_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "record_expression"
         }
       ]
     },
@@ -1759,7 +1796,7 @@
         }
       ]
     },
-    "function_call": {
+    "call_expression": {
       "type": "PREC",
       "value": 13,
       "content": {
@@ -1834,44 +1871,7 @@
         ]
       }
     },
-    "_simple_expression": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "lower_identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "upper_identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_function"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "lambda_function"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "group_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_call"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "record_expression"
-        }
-      ]
-    },
-    "group_expression": {
+    "parenthesized_expression": {
       "type": "SEQ",
       "members": [
         {
