@@ -403,9 +403,15 @@ module.exports = grammar({
 
     constructor_pattern: ($) =>
       seq(
-        $.upper_identifier,
+        field("constructor", $.upper_identifier),
         optional(
-          seq("(", optional(seq($.pattern, repeat(seq(",", $.pattern)))), ")"),
+          seq(
+            "(",
+            optional(
+              field("arguments", seq($.pattern, repeat(seq(",", $.pattern)))),
+            ),
+            ")",
+          ),
         ),
       ),
 

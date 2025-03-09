@@ -234,20 +234,31 @@
   {
     "type": "constructor_pattern",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "pattern",
-          "named": true
-        },
-        {
-          "type": "upper_identifier",
-          "named": true
-        }
-      ]
+    "fields": {
+      "arguments": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
+          }
+        ]
+      },
+      "constructor": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "upper_identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
