@@ -11,6 +11,20 @@ module Main exposing (..)
 
     let id(x) =
         x
+
+    let pi() -> Float =
+        float_pi()
+
+    let keep(list, predicate) =
+        list
+        |> fold_right(
+            Nil,
+            fn(x, xs) =>
+                if predicate(x) then
+                    cons(xs, x)
+                else
+                    xs
+        )
 end
 
 ----------------------------------------------------------------
@@ -52,7 +66,39 @@ end
         (lower_identifier)
         (parameter_list
           (lower_identifier))
-        (lower_identifier)))))
+        (lower_identifier)))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (return_type
+          (type_expression
+            (upper_identifier)))
+        (function_call
+          (lower_identifier))))
+    (statement
+      (function_declaration
+        (lower_identifier)
+        (parameter_list
+          (lower_identifier)
+          (lower_identifier))
+        (binary_expression
+          (lower_identifier)
+          (function_call
+            (lower_identifier)
+            (upper_identifier)
+            (lambda_function
+              (parameter_list
+                (lower_identifier)
+                (lower_identifier))
+              (if_expression
+                (function_call
+                  (lower_identifier)
+                  (lower_identifier))
+                (function_call
+                  (lower_identifier)
+                  (lower_identifier)
+                  (lower_identifier))
+                (lower_identifier)))))))))
 
 ================================================================
 Function Call
