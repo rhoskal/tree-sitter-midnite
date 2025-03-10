@@ -9,8 +9,8 @@
 
 ;; Function declarations
 
-(function_declaration) @fold
 (foreign_function_declaration) @fold
+(function_declaration) @fold
 (lambda_expression) @fold
 
 ;; Comments

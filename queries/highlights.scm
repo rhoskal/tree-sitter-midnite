@@ -13,6 +13,7 @@
 
 (exposing_list
   "(" @punctuation.bracket
+  "," @punctuation.delimiter
   ")" @punctuation.bracket)
 
 (expose_everything
@@ -32,13 +33,18 @@
   "include" @keyword)
 
 (include_statement
-  (qualified_module) @namespace)
+  (qualified_module
+    "." @punctuation.delimiter))
 
 (open_statement
   "open" @keyword)
 
 (open_statement
   (qualified_module) @namespace)
+
+(open_statement
+  (qualified_module
+    "." @punctuation.delimiter))
 
 (open_statement
   "as" @keyword)
@@ -55,6 +61,7 @@
 
 (import_list
   "(" @punctuation.bracket
+  "," @punctuation.delimiter
   ")" @punctuation.bracket)
 
 (import_item
@@ -70,12 +77,9 @@
 (import_item
   (upper_identifier) @type)
 
-(import_item
-  (upper_identifier) @type
-  (expose_everything) @operator)
-
 (hiding_list
   "(" @punctuation.bracket
+  "," @punctuation.delimiter
   ")" @punctuation.bracket)
 
 (hiding_list
@@ -93,6 +97,7 @@
 
 (type_parameters
   "(" @punctuation.bracket
+  "," @punctuation.delimiter
   ")" @punctuation.bracket)
 
 (type_declaration
@@ -118,12 +123,16 @@
   "{" @punctuation.bracket
   "}" @punctuation.bracket)
 
+(record_type
+  (record_field) "," @punctuation.delimiter)
+
 (record_field
   (lower_identifier) @property
   ":" @punctuation.type)
 
 (tuple_type
   "(" @punctuation.bracket
+  "," @punctuation.delimiter
   ")" @punctuation.bracket)
 
 (type_expression
@@ -159,6 +168,9 @@
   "(" @punctuation.bracket
   ")" @punctuation.bracket)
 
+(function_declaration
+  body: (upper_identifier) @constructor)
+
 (parameter_list
   "," @punctuation.delimiter)
 
@@ -168,11 +180,38 @@
 (parameter_list
   "_" @variable.builtin)
 
+(parameter_list
+  (type_annotation
+    (type_expression
+      (upper_identifier)
+      "(" @punctuation.bracket
+      (type_expression)
+      ")" @punctuation.bracket)))
+
+(parameter_list
+  (type_annotation
+    (type_expression
+      (upper_identifier)
+      "("
+      (type_expression
+        (upper_identifier)
+        "(" @punctuation.bracket
+        (type_expression)
+        ")" @punctuation.bracket)
+      ")")))
+
 (type_annotation
   ":" @punctuation.type)
 
 (return_type
   "->" @punctuation.type)
+
+(return_type
+  (type_expression
+    (upper_identifier)
+    "(" @punctuation.bracket
+    (type_expression)
+    ")" @punctuation.bracket))
 
 (lambda_expression
   "fn" @keyword
@@ -202,6 +241,9 @@
     ((_) "," @punctuation.delimiter _)
   ))
 
+(qualified_function
+  "." @punctuation.delimiter)
+
 ;; Section - Expressions
 
 (unary_expression
@@ -218,6 +260,12 @@
   "{" @punctuation.bracket
   "}" @punctuation.bracket)
 
+(record_expression
+  (record_field_shorthand) "," @punctuation.delimiter)
+
+(record_expression
+  (record_field_value) "," @punctuation.delimiter)
+
 (record_field_value
   (lower_identifier) @property
   "=" @operator)
@@ -232,15 +280,19 @@
 
 (list_expression
   "[" @punctuation.bracket
+  "," @punctuation.delimiter
   "]" @punctuation.bracket)
-
-(list_expression
-  "," @punctuation.delimiter)
 
 (if_expression
   "if" @keyword
   "then" @keyword
   "else" @keyword)
+
+(if_expression
+  then_branch: (upper_identifier) @constructor)
+
+(if_expression
+  else_branch: (upper_identifier) @constructor)
 
 ;; Section - Pattern Matching
 
@@ -277,10 +329,8 @@
 
 (constructor_pattern
   "(" @punctuation.bracket
+  "," @punctuation.delimiter
   ")" @punctuation.bracket)
-
-(constructor_pattern
-  "," @punctuation.delimiter)
 
 (tuple_pattern
   "(" @punctuation.bracket
@@ -305,13 +355,17 @@
 ;; Section - Literals
 
 (integer_literal) @number
+
 (float_literal) @number
 
 (char_literal) @string
+
 (string_literal) @string
+
 (multiline_string_literal) @string
 
 ;; Section - Comments
 
 (doc_comment) @comment.doc
+
 (line_comment) @comment
