@@ -97,7 +97,7 @@
 
 (type_parameters
   "(" @punctuation.bracket
-  "," @punctuation.delimiter
+  (type_variable) @type.parameter
   ")" @punctuation.bracket)
 
 (type_declaration
@@ -105,7 +105,11 @@
   "=" @operator)
 
 (type_declaration
-  (upper_identifier) @type.definition)
+  (upper_identifier) @type.definition
+  (type_parameters
+    "(" @punctuation.bracket
+    (type_variable) @type.parameter
+    ")" @punctuation.bracket))
 
 (type_variants
   "|" @punctuation.delimiter)
@@ -113,11 +117,22 @@
 (type_variant
   (upper_identifier) @constructor)
 
-(type_variable
-  (lower_identifier) @variable.parameter)
+(type_variant
+  (upper_identifier) @constructor
+  "(" @punctuation.bracket
+  (type_expression
+    (lower_identifier) @type.parameter)
+  ")" @punctuation.bracket)
 
 (type_variable
   (upper_identifier) @type.parameter)
+
+(type_expression
+  (upper_identifier) @type
+  "(" @punctuation.bracket
+  (type_expression
+    (lower_identifier) @type.parameter)
+  ")" @punctuation.bracket)
 
 (record_type
   "{" @punctuation.bracket
