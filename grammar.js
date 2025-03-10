@@ -440,7 +440,8 @@ module.exports = grammar({
 
     qualified_module: ($) => sepBy1(".", $.upper_identifier),
 
-    qualified_function: ($) => seq($.upper_identifier, ".", $.lower_identifier),
+    qualified_function: ($) =>
+      seq(sepBy1(".", $.upper_identifier), ".", $.lower_identifier),
 
     // Section - Literals
 
