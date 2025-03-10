@@ -83,7 +83,7 @@
   ")" @punctuation.bracket)
 
 (hiding_list
-  (lower_identifier) @variable)
+  (lower_identifier) @function)
 
 ;; Section - Types
 
@@ -140,6 +140,9 @@
 
 (type_expression
   (lower_identifier) @type.parameter)
+
+(type_expression
+  "," @punctuation.delimiter)
 
 ;; Section - Functions
 
