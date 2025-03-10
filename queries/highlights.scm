@@ -100,6 +100,11 @@
   (type_variable) @type.parameter
   ")" @punctuation.bracket)
 
+(type_parameters
+  (type_variable) @type.parameter
+  ("," @punctuation.delimiter
+   (type_variable) @type.parameter))
+
 (type_declaration
   "type" @keyword
   "=" @operator)
