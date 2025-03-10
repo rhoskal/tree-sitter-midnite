@@ -139,6 +139,13 @@
     (lower_identifier) @type.parameter)
   ")" @punctuation.bracket)
 
+(tuple_expression
+  "(" @punctuation.bracket
+  (upper_identifier) @constructor
+  ("," @punctuation.delimiter
+  (upper_identifier) @constructor)
+  ")" @punctuation.bracket)
+
 (record_type
   "{" @punctuation.bracket
   "}" @punctuation.bracket)
@@ -250,13 +257,15 @@
   ")" @punctuation.bracket)
 
 (call_expression
-  function: (qualified_function) @function
+  (qualified_function) @function
   "(" @punctuation.bracket
+  (upper_identifier) @constructor
   ")" @punctuation.bracket)
 
 (call_expression
-  function: (upper_identifier) @constructor
+  (upper_identifier) @constructor
   "(" @punctuation.bracket
+  (upper_identifier) @constructor
   ")" @punctuation.bracket)
 
 (call_expression
@@ -329,6 +338,15 @@
 
 (match_case
   body: (upper_identifier) @constructor)
+
+("(" @punctuation.bracket _ ")" @punctuation.bracket)
+
+(match_case
+  (pattern
+    (constructor_pattern
+      (upper_identifier) @constructor
+        (pattern
+          (ignore_pattern) @variable.builtin))))
 
 (ignore_pattern) @variable.builtin
 
