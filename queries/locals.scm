@@ -31,8 +31,11 @@
 ;; Scope boundaries
 
 (function_declaration) @scope                      ;; Function bodies create scopes
+
 (lambda_expression) @scope                         ;; Lambda bodies create scopes
+
 (match_expression) @scope                          ;; Match expressions create scopes
+
 (match_case) @scope                                ;; Individual match cases create scopes
 
 ;; Module definitions

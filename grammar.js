@@ -30,7 +30,7 @@ module.exports = grammar({
     exposing_list: ($) =>
       choice($.expose_everything, seq("(", sepBy1(",", $.exposed_item), ")")),
 
-    expose_everything: (_) => "(..)",
+    expose_everything: (_) => seq("(", "..", ")"),
 
     exposed_item: ($) =>
       seq(
@@ -440,7 +440,8 @@ module.exports = grammar({
 
     qualified_module: ($) => sepBy1(".", $.upper_identifier),
 
-    qualified_function: ($) => seq($.upper_identifier, ".", $.lower_identifier),
+    qualified_function: ($) =>
+      seq(sepBy1(".", $.upper_identifier), ".", $.lower_identifier),
 
     // Section - Literals
 

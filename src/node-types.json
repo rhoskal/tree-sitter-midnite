@@ -349,6 +349,11 @@
     "fields": {}
   },
   {
+    "type": "expose_everything",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "exposed_item",
     "named": true,
     "fields": {},
@@ -2301,6 +2306,10 @@
     "named": false
   },
   {
+    "type": "..",
+    "named": false
+  },
+  {
     "type": "/",
     "named": false
   },
@@ -2383,10 +2392,6 @@
   {
     "type": "end",
     "named": false
-  },
-  {
-    "type": "expose_everything",
-    "named": true
   },
   {
     "type": "exposing",
