@@ -3,32 +3,32 @@ Function Declaration
 ================================================================
 
 module Main exposing (..)
-    foreign sqrt(x : Float) -> Float =
-        "c_sqrt"
 
-    let double(x : Int) -> Int =
-        x * 2
+foreign sqrt(_ : Float) -> Float =
+    "c_sqrt"
 
-    let id(x) =
-        x
+let double(x : Int) -> Int =
+    x * 2
 
-    let pi() -> Float =
-        float_pi()
+let id(x) =
+    x
 
-    let mk_date(month : Month, day : Int, year : Int) -> Date =
-        Date({ month, day, year })
+let pi() -> Float =
+    float_pi()
 
-    let keep(list, predicate) =
-        list
-        |> fold_right(
-            Nil,
-            fn(x, xs) =>
-                if predicate(x) then
-                    cons(xs, x)
-                else
-                    xs
-        )
-end
+let mk_date(month : Month, day : Int, year : Int) -> Date =
+    Date({ month, day, year })
+
+let keep(list, predicate) =
+    list
+    |> fold_right(
+        Nil,
+        fn(x, xs) =>
+            if predicate(x) then
+                cons(xs, x)
+            else
+                xs
+    )
 
 ----------------------------------------------------------------
 
@@ -42,7 +42,6 @@ end
       (foreign_function_declaration
         (lower_identifier)
         (parameter_list
-          (lower_identifier)
           (type_annotation
             (type_expression
               (upper_identifier))))
@@ -136,15 +135,15 @@ Call Expression
 ================================================================
 
 module Main exposing (..)
-    let apply(f, x) =
-        f(x)
 
-    let c() =
-        add(1, 2)
+let apply(f, x) =
+    f(x)
 
-    let h() =
-        f(g(5))
-end
+let c() =
+    add(1, 2)
+
+let h() =
+    f(g(5))
 
 ----------------------------------------------------------------
 
@@ -184,15 +183,15 @@ Lambda Expression
 ==================
 
 module Main exposing (..)
-    let f() =
-        fn(x) => x + 1
 
-    let apply(f, x) =
-        f(x)
+let f() =
+    fn(x) => x + 1
 
-    let result() =
-        apply(fn(x) => x, 5)
-end
+let apply(f, x) =
+    f(x)
+
+let result() =
+    apply(fn(x) => x, 5)
 
 ---
 

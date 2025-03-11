@@ -3,34 +3,34 @@ Arithmetic Operators
 ================================================================
 
 module Main exposing (..)
-    # Integer operations
-    let add(x, y) = x + y
-    let subtract(x, y) = x - y
-    let multiply(x, y) = x * y
-    let divide(x, y) = x / y
-    let power(x, y) = x ** y
 
-    # Float operations
-    let add_float(x, y) = x +. y
-    let subtract_float(x, y) = x -. y
-    let multiply_float(x, y) = x *. y
-    let divide_float(x, y) = x /. y
+# Integer operations
+let add(x, y) = x + y
+let subtract(x, y) = x - y
+let multiply(x, y) = x * y
+let divide(x, y) = x / y
+let power(x, y) = x ** y
 
-    # Mixed literals
-    let add_int_literal(x) = x + 42
-    let add_hex_literal(x) = x + 0xFF
-    let add_binary_literal(x) = x + 0b1010
-    let add_octal_literal(x) = x + 0o755
+# Float operations
+let add_float(x, y) = x +. y
+let subtract_float(x, y) = x -. y
+let multiply_float(x, y) = x *. y
+let divide_float(x, y) = x /. y
 
-    # Float literals
-    let add_float_literal(x) = x +. 3.14159
-    let add_scientific_notation(x) = x +. 1.6e-19
-    let add_exponent_only(x) = x +. 6e23
+# Mixed literals
+let add_int_literal(x) = x + 42
+let add_hex_literal(x) = x + 0xFF
+let add_binary_literal(x) = x + 0b1010
+let add_octal_literal(x) = x + 0o755
 
-    # Unary operations
-    let negate(x) = -x
-    let complex_expr(x, y) = -x * y + 5
-end
+# Float literals
+let add_float_literal(x) = x +. 3.14159
+let add_scientific_notation(x) = x +. 1.6e-19
+let add_exponent_only(x) = x +. 6e23
+
+# Unary operations
+let negate(x) = -x
+let complex_expr(x, y) = -x * y + 5
 
 ----------------------------------------------------------------
 
@@ -207,8 +207,8 @@ String Concat
 ================================================================
 
 module Main exposing (..)
-    let concat_strings(a, b) = a <> b
-end
+
+let concat_strings(a, b) = a <> b
 
 ----------------------------------------------------------------
 
@@ -233,8 +233,8 @@ List Concat
 ================================================================
 
 module Main exposing (..)
-    let concat_lists(a, b) = a ++ b
-end
+
+let concat_lists(a, b) = a ++ b
 
 ----------------------------------------------------------------
 
@@ -259,13 +259,13 @@ Comparison Operators
 ================================================================
 
 module Main exposing (..)
-    let equals(x, y) = x == y
-    let not_equals(x, y) = x /= y
-    let less_than(x, y) = x < y
-    let less_than_equals(x, y) = x <= y
-    let greater_than(x, y) = x > y
-    let greater_than_equals(x, y) = x >= y
-end
+
+let equals(x, y) = x == y
+let not_equals(x, y) = x /= y
+let less_than(x, y) = x < y
+let less_than_equals(x, y) = x <= y
+let greater_than(x, y) = x > y
+let greater_than_equals(x, y) = x >= y
 
 ----------------------------------------------------------------
 
@@ -335,9 +335,9 @@ Logical Operators
 ================================================================
 
 module Main exposing (..)
-    let logical_and(x, y) = x && y
-    let logical_or(x, y) = x || y
-end
+
+let logical_and(x, y) = x && y
+let logical_or(x, y) = x || y
 
 ----------------------------------------------------------------
 
@@ -371,8 +371,8 @@ List Operations
 ================================================================
 
 module Main exposing (..)
-    let cons(head, tail) = head :: tail
-end
+
+let cons(head, tail) = head :: tail
 
 ----------------------------------------------------------------
 
@@ -397,8 +397,8 @@ Pipeline Operator
 ================================================================
 
 module Main exposing (..)
-    let pipeline(x) = x |> add(5) |> multiply(2)
-end
+
+let pipeline(x) = x |> add(5) |> multiply(2)
 
 ----------------------------------------------------------------
 
@@ -428,9 +428,9 @@ Operator Precedence
 ================================================================
 
 module Main exposing (..)
-    let complex_math(x, y, z) = x * y + z / (x ** 2) - 5
-    let complex_logic(a, b, c) = (a && b) || (c && a)
-end
+
+let complex_math(x, y, z) = x * y + z / (x ** 2) - 5
+let complex_logic(a, b, c) = (a && b) || (c && a)
 
 ----------------------------------------------------------------
 
