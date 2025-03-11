@@ -3,27 +3,27 @@ Match Expression
 ================================================================
 
 module Match exposing (..)
-    let zero?(x) =
-        match x on
-        | 0 => True
-        | _ => False
 
-    let length(list) =
-        match list on
-        | Nil => 0
-        | x :: xs => 1 + length(xs)
+let zero?(x) =
+    match x on
+    | 0 => True
+    | _ => False
 
-    let get_sign(n) =
-        match n on
-        | x when x > 0 => "positive"
-        | x when x < 0 => "negative"
-        | _ => "zero"
+let length(list) =
+    match list on
+    | Nil => 0
+    | x :: xs => 1 + length(xs)
 
-    let and(x : Bool, y : Bool) -> Bool =
-        match (x, y) on
-        | (True, True) => True
-        | _ => False
-end
+let get_sign(n) =
+    match n on
+    | x when x > 0 => "positive"
+    | x when x < 0 => "negative"
+    | _ => "zero"
+
+let and(x : Bool, y : Bool) -> Bool =
+    match (x, y) on
+    | (True, True) => True
+    | _ => False
 
 ----------------------------------------------------------------
 

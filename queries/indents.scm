@@ -46,7 +46,6 @@
 ;; End blocks and closing brackets for dedentation
 
 [
-  "end"
   ")"
   "]"
   "}"

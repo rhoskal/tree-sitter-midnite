@@ -3,16 +3,16 @@ Imports
 ================================================================
 
 module Main exposing (..)
-    include Foo.Bar
 
-    open Foo
-    open Baz as B
+include Foo.Bar
 
-    open Std.List using (map, filter, Maybe, Either(..))
-    open Std.List using (map as list_map, filter)
+open Foo
+open Baz as B
 
-    open Foo.Bar hiding (internal_func)
-end
+open Std.List using (map, filter, Maybe, Either(..))
+open Std.List using (map as list_map, filter)
+
+open Foo.Bar hiding (internal_func)
 
 ----------------------------------------------------------------
 

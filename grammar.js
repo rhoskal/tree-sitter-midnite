@@ -24,7 +24,6 @@ module.exports = grammar({
         "exposing",
         field("exports", $.exposing_list),
         repeat($.statement),
-        "end",
       ),
 
     exposing_list: ($) =>

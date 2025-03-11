@@ -2,8 +2,7 @@
 
 (module_declaration
   "module" @keyword
-  "exposing" @keyword
-  "end" @keyword)
+  "exposing" @keyword)
 
 (module_declaration
   name: (qualified_module) @module.name)

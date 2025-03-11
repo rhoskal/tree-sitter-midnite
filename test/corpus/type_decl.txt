@@ -3,20 +3,20 @@ Type Alias
 ================================================================
 
 module Main exposing (..)
-    type alias Point =
-        { x : Float
-        , y : Float
-        }
 
-    type alias Seconds =
-        Int
+type alias Point =
+    { x : Float
+    , y : Float
+    }
 
-    type alias Dict(k, v) =
-        Map(k, v)
+type alias Seconds =
+    Int
 
-    type alias TreeMap(k, v) =
-        Tree(Pair(k, v), Compare(k))
-end
+type alias Dict(k, v) =
+    Map(k, v)
+
+type alias TreeMap(k, v) =
+    Tree(Pair(k, v), Compare(k))
 
 ----------------------------------------------------------------
 
@@ -84,16 +84,16 @@ Type Variant
 ================================================================
 
 module Main exposing (..)
-    type Boolean = True | False
 
-    type Maybe(a) =
-        | None
-        | Some(a)
+type Boolean = True | False
 
-    type Tree(a) =
-        | Leaf
-        | Branch(Tree(a), a, Tree(a))
-end
+type Maybe(a) =
+    | None
+    | Some(a)
+
+type Tree(a) =
+    | Leaf
+    | Branch(Tree(a), a, Tree(a))
 
 ----------------------------------------------------------------
 
@@ -151,22 +151,22 @@ Record Type
 ================================================================
 
 module Main exposing (..)
-    type Point(a) =
-        { x : a
-        , y : a
-        }
 
-    type Dict(k, v) =
-        { keys : List(k)
-        , values : List(v)
-        }
+type Point(a) =
+    { x : a
+    , y : a
+    }
 
-    type Storage(a) =
-        { items : List(Maybe(a))
-        , count : Maybe(Int)
-        , names : List(String)
-        }
-end
+type Dict(k, v) =
+    { keys : List(k)
+    , values : List(v)
+    }
+
+type Storage(a) =
+    { items : List(Maybe(a))
+    , count : Maybe(Int)
+    , names : List(String)
+    }
 
 ----------------------------------------------------------------
 

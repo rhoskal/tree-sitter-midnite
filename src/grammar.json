@@ -39,10 +39,6 @@
             "type": "SYMBOL",
             "name": "statement"
           }
-        },
-        {
-          "type": "STRING",
-          "value": "end"
         }
       ]
     },
